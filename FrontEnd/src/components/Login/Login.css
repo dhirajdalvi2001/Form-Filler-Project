@@ -1,6 +1,6 @@
 .main {
     width: 100vw;
-    height: 100%;
+    height: 94vh;
     background-image: url(/src/images/bg-texture.svg);
     background-size: 500px;
     display: flex;
@@ -45,11 +45,11 @@ input {
     border-radius: 0.4rem;
     text-indent: 1rem;
     outline: none;
-    caret-color: hsl(248, 32%, 49%);
+    caret-color: rgba(110, 14, 158, 1);
 }
 
 input:focus {
-    border: 1px solid hsl(248, 32%, 49%);
+    border: 1px solid rgba(110, 14, 158, 1);
 }
 
 .red {
@@ -82,6 +82,7 @@ button {
     text-transform: uppercase;
     font-size: 0.7rem;
     letter-spacing: 1px;
+    transition: opacity 1s;
 }
 
 button:hover {
@@ -109,4 +110,9 @@ h6 {
     font-weight: 900;
     text-decoration: none;
     color: hsl(248, 32%, 49%);
+    transition: color 1s;
+}
+
+.bottom a:hover {
+    color: rgba(255, 255, 255, 0.85);
 }

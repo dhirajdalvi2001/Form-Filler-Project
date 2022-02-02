@@ -1,0 +1,18 @@
+.main {
+    width: 100vw;
+    height: 94vh;
+    background-image: url(/src/images/bg-texture.svg);
+    background-size: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    margin: auto;
+    width: auto;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+}
