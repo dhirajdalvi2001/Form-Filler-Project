@@ -1,13 +1,13 @@
-import "../Login/Login.css";
+import "../Signup/Signup.css";
 import { Link } from "react-router-dom";
 
-function Login() {
+function Signup() {
   return (
     <div className="main">
       <div className="container">
         <div className="heading1">
-          <h1>Welcome Back</h1>
-          <h2>Login To Continue</h2>
+          <h1>Creat Account</h1>
+          <h2>Create A New Account</h2>
         </div>
         <div className="form1">
           <form id="form1" name="form1">
@@ -29,13 +29,22 @@ function Login() {
 
             <h6 className="form-error" id="password-msg"></h6>
 
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              id="c-password"
+              name="c-password"
+            />
+
+            <h6 className="form-error" id="c-password-msg"></h6>
+
             <button type="submit">Login </button>
 
             <div className="bottom">
               <h6>
-                Don't have an account?{" "}
-                <Link to="/Sign-up" className="switch-page">
-                  Create a new account
+                Already have an account?{" "}
+                <Link to="/Login" className="switch-page">
+                  Login
                 </Link>
               </h6>
             </div>
@@ -45,4 +54,4 @@ function Login() {
     </div>
   );
 }
-export default Login;
+export default Signup;
