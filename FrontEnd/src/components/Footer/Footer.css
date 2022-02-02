@@ -1,0 +1,14 @@
+.footer {
+    height: 40px;
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient( 90deg, rgba(84, 9, 121, 1) 0%, rgba(110, 14, 158, 1) 51%, rgba(84, 9, 121, 1) 100%);
+}
+
+.footer h1 {
+    margin: 0 auto;
+    height: auto;
+    width: max-content;
+}
