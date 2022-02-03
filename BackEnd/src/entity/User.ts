@@ -1,16 +1,18 @@
-import {Entity, ObjectIdColumn, ObjectID, Column} from "typeorm";
+// import { Entity, ObjectIdColumn, ObjectID, Column } from "typeorm";
 
-@Entity()
-export class User {
+// @Entity()
+// export class User {
+//   @ObjectIdColumn()
+//   id: ObjectID;
 
-    @ObjectIdColumn()
-    id: ObjectID;
+//   @Column()
+//   email: string;
 
-    @Column()
-    email: string;
+//   @Column()
+//   password: string;
 
-    @Column()
-   password: string;
+//   @Column("int", { default: 0 })
+//   tokenV: number;
+// }
 
-
-}
+import { Mongoose } from "mongoose";
