@@ -1,16 +1,13 @@
 .main {
-    width: 100vw;
     height: 94vh;
     background-image: url(/src/images/bg-texture.svg);
     background-size: 500px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .container {
-    margin: auto;
+    margin: 0 auto 0;
     width: auto;
     height: max-content;
     display: flex;
@@ -39,7 +36,7 @@ form {
 
 input {
     width: 300px;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     padding: 0.9rem;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 0.4rem;
@@ -54,7 +51,7 @@ input:focus {
 
 .red {
     border: 2px solid #ff7a7a;
-    background-image: url(images/svg.svg);
+    background-image: url(/src/images/exclamation-icon.svg);
     background-repeat: no-repeat;
     background-size: 2.1rem;
     background-position: right;
@@ -99,7 +96,7 @@ button:hover {
 }
 
 h6 {
-    margin: auto;
+    margin: 0.5rem auto;
     font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.85);
     font-weight: 600;
@@ -115,4 +112,58 @@ h6 {
 
 .bottom a:hover {
     color: rgba(255, 255, 255, 0.85);
+}
+
+#message {
+    display: block;
+    text-align: left;
+}
+
+h3 {
+    position: relative;
+    left: -20px;
+    color: rgba(255, 255, 255, 0.65);
+    width: max-content;
+    margin: 1rem auto 0;
+    font-size: 0.8rem;
+}
+
+ul {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+li {
+    list-style: none;
+    height: 18px;
+}
+
+p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.valid {
+    color: green;
+}
+
+.valid:before {
+    position: relative;
+    top: 17px;
+    left: -20px;
+    content: "✔";
+}
+
+
+/* Add a red text color and an "x" icon when the requirements are wrong */
+
+.invalid {
+    color: red;
+}
+
+.invalid:before {
+    position: relative;
+    top: 17px;
+    left: -20px;
+    content: "✖";
 }
