@@ -2,8 +2,8 @@ import Footer from "../Footer/Footer";
 
 function Home() {
   return (
-    <div className="main">
-      <div className="container">
+    <div>
+      <div>
         <h1>Home</h1>
       </div>
       <Footer />
