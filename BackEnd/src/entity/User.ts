@@ -1,18 +1,22 @@
-// import { Entity, ObjectIdColumn, ObjectID, Column } from "typeorm";
+import { Schema, model } from "mongoose";
+import { Int32 } from "mongodb";
+import { UserData } from "./UserData";
+export interface User {
+  email: string;
+  password: string;
+  authCount: number;
+  userData?: Schema.Types.ObjectId;
+  parentData?: Schema.Types.ObjectId;
+  formData?: Schema.Types.ObjectId;
+}
 
-// @Entity()
-// export class User {
-//   @ObjectIdColumn()
-//   id: ObjectID;
+const UserSchema = new Schema<User>({
+  email: { type: String, required: true, unique: true, index: true },
+  password: { type: String, required: true },
+  authCount: { type: Number, required: true, default: 0 },
+  userData: { type: Schema.Types.ObjectId, ref: "UserData" },
+  parentData: { type: Schema.Types.ObjectId, ref: "UserParentData" },
+  formData: { type: Schema.Types.ObjectId, ref: "FormData" },
+});
 
-//   @Column()
-//   email: string;
-
-//   @Column()
-//   password: string;
-
-//   @Column("int", { default: 0 })
-//   tokenV: number;
-// }
-
-import { Mongoose } from "mongoose";
+export const UserModel = model<User>("User", UserSchema);
