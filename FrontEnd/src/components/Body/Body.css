@@ -1,5 +1,4 @@
-.body {
-    height: 94vh;
+#body {
     background-image: url(/src/images/bg-texture.svg);
     background-size: 500px;
     display: flex;

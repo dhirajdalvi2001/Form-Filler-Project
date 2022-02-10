@@ -7,7 +7,7 @@ import Signup from "../Login/Signup";
 
 function Body() {
   return (
-    <div className="body">
+    <div id="body">
       <Routes>
         <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/about" element={<About />}></Route>

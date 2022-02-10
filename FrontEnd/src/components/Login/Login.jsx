@@ -16,8 +16,8 @@ function Login() {
   }
   //                                                                      HTML
   return (
-    <div className="main">
-      <div className="container">
+    <div className="login-main">
+      <div className="login-container">
         <div className="heading1">
           <h1>Welcome Back</h1>
           <h2>Login To Get Started</h2>

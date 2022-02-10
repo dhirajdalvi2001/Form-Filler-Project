@@ -1,9 +1,10 @@
 import Footer from "../Footer/Footer";
+import "./Home.css";
 
 function Home() {
   return (
-    <div>
-      <div>
+    <div id="home-main">
+      <div id="home">
         <h1>Home</h1>
       </div>
       <Footer />

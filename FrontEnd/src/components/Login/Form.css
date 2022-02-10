@@ -1,9 +1,9 @@
-.main {
+.login-main {
     width: 40vw;
     height: 80vh;
 }
 
-.container {
+.login-container {
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -1,23 +1,25 @@
-.footer {
-    height: 120px;
-    display: flex;
-    color: white;
-    justify-content: center;
-    align-items: center;
+#footer {
+    height: max-content;
+    width: 100vw;
     background: linear-gradient( 90deg, rgb(51, 0, 51) 51%, rgb(51, 0, 51) 0%, rgb(51, 0, 51) 51%);
     border: 1px #540054;
     border-style: solid hidden hidden hidden;
 }
 
-.footer h1 {
-    margin: 0 auto;
-    height: auto;
-    width: max-content;
+.social-main {
+    margin: auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-evenly;
 }
 
-.footer h3 {
-    font-size: 1rem;
-    margin: 0 auto;
-    height: auto;
-    width: max-content;
+.social-container {
+    width: 10%;
+}
+
+.social-container h5 {
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
