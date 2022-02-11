@@ -1,11 +1,13 @@
-import "./Footer.css";
 import { FaGithubSquare, FaLinkedin, FaTwitter } from "react-icons/Fa";
+import GlobalStyles from "./styles/Global";
+import { Container, StldFooter } from "./styles/StldFooter";
 
 function Footer() {
   return (
-    <div id="footer">
-      <div className="social-main">
-        <div className="social-container">
+    <>
+      <GlobalStyles />
+      <StldFooter>
+        <Container>
           <h5>
             <FaGithubSquare /> /Saurabh
           </h5>
@@ -15,8 +17,8 @@ function Footer() {
           <h5>
             <FaTwitter /> /Saurabh
           </h5>
-        </div>
-        <div className="social-container">
+        </Container>
+        <Container>
           <h5>
             <FaGithubSquare /> /Parikshit
           </h5>
@@ -26,8 +28,8 @@ function Footer() {
           <h5>
             <FaTwitter /> /Parikshit
           </h5>
-        </div>
-        <div className="social-container">
+        </Container>
+        <Container>
           <h5>
             <FaGithubSquare /> /Dhiraj
           </h5>
@@ -37,9 +39,9 @@ function Footer() {
           <h5>
             <FaTwitter /> /Dhiraj
           </h5>
-        </div>
-      </div>
-    </div>
+        </Container>
+      </StldFooter>
+    </>
   );
 }
 
