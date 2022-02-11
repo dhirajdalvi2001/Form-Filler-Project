@@ -7,11 +7,12 @@ height: 90.7vh;
 display: flex;
 justify-content: center;
 align-items: center;
+overflow: hidden;
 `
 
 export const PrimaryContainer = styled.div `
-width: 32%;
-height: 80%;
+width: 450px;
+height: 500px;
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -19,10 +20,15 @@ align-items: center;
 border: 0;
 border-radius: 12px;
 box-shadow: 0 0 50px rgb(251, 248, 241, 0.35);
+
+@media screen and (max-width: 600px) {
+    flex-wrap: wrap;
+    width: 325px;
+}
 `
 
 export const SecondaryContainer = styled.div `
-width: 90%;
+width: 100%;
 height: max-content;
 `
 
@@ -35,6 +41,10 @@ color: rgb(251, 248, 241, 0.8);
 h1 {
     margin: 0 auto;
     font-size: 44px;
+    @media screen and (max-width: 600px) {
+    font-size: 30px;
+}
+
 }
 
 h2 {
@@ -44,8 +54,9 @@ h2 {
 `
 
 export const Form1 = styled.div `
+width: 100%;
 height: max-content;
-margin: 5px 40px;
+margin: 40px auto;
 
 h5 {
     width: 100%;
@@ -56,11 +67,12 @@ h5 {
     font-size: 12px;
     text-align: center;
     color: #ccc;
+    flex-wrap: wrap;
 }
 
 h6 {
     margin: auto;
-    width: 80%;
+    width: 260px;
     height: 0;
     font-size: 10px;
     text-align: right;
@@ -79,7 +91,7 @@ h6 {
 input {
     display: flex;
     margin: 25px auto 0;
-    width: 80%;
+    width: 260px;
     height: 46px;
     border: 0;
     border-radius: 8px;
@@ -95,7 +107,7 @@ input::placeholder {
 
 button {
     margin: 20px auto 20px;
-    width: 80%;
+    width: 260px;
     height: 46px;
     display: flex;
     justify-content: center;
@@ -114,6 +126,14 @@ button {
 button:hover {
     letter-spacing: 12px;
     background-color: rgba(151, 45, 251, 1);
+}
+
+@media screen and (max-width: 600px) {
+    margin: 10px auto;
+
+    input {
+    margin: 15px auto 0;
+}
 }
 
 `
