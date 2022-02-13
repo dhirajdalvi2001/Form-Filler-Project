@@ -1,20 +1,20 @@
 {
-  "name": "form-filler",
-  "version": "0.0.0",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-icons": "^4.3.1",
-    "react-router-dom": "^6.2.1",
-    "styled-components": "^5.3.3"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^1.0.7",
-    "vite": "^2.7.2"
-  }
+    "name": "form-filler",
+    "version": "0.0.0",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-icons": "^4.3.1",
+        "react-router-dom": "^6.2.1",
+        "styled-components": "^5.3.3"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-react": "^1.0.7",
+        "vite": "^2.7.2"
+    }
 }
