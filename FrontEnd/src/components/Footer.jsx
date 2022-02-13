@@ -8,36 +8,36 @@ function Footer() {
       <GlobalStyles />
       <StldFooter>
         <Container>
-          <h5>
-            <FaGithubSquare /> /Saurabh
-          </h5>
-          <h5>
-            <FaLinkedin /> /Saurabh
-          </h5>
-          <h5>
-            <FaTwitter /> /Saurabh
-          </h5>
+          <h3>Form Filler</h3>
+          <h5>About</h5>
+          <h5>Contact</h5>
+          <h5>Login</h5>
         </Container>
         <Container>
-          <h5>
-            <FaGithubSquare /> /Parikshit
-          </h5>
-          <h5>
-            <FaLinkedin /> /Parikshit
-          </h5>
-          <h5>
-            <FaTwitter /> /Parikshit
-          </h5>
+          <h3>Group Members</h3>
+          <h5>Saurabh Patil</h5>
+          <h5>Parikshit Thale</h5>
+          <h5>Dhiraj Dalvi</h5>
         </Container>
         <Container>
+          <h3>Account</h3>
+          <h5>Open An Account</h5>
+          <h5>Settings</h5>
+          <h5>Change Password</h5>
+        </Container>
+        <Container>
+          <h3>Socials</h3>
           <h5>
-            <FaGithubSquare /> /Dhiraj
+            <FaGithubSquare />
+            &nbsp; /Saurabh
           </h5>
           <h5>
-            <FaLinkedin /> /Dhiraj
+            <FaGithubSquare />
+            &nbsp; /Parikshit
           </h5>
           <h5>
-            <FaTwitter /> /Dhiraj
+            <FaGithubSquare />
+            &nbsp; /Dhiraj
           </h5>
         </Container>
       </StldFooter>

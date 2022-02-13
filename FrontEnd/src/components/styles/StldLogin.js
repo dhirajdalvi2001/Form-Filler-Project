@@ -43,8 +43,7 @@ h1 {
     font-size: 44px;
     @media screen and (max-width: 600px) {
     font-size: 30px;
-}
-
+    }
 }
 
 h2 {
@@ -124,7 +123,7 @@ button {
 }
 
 button:hover {
-    letter-spacing: 12px;
+    letter-spacing: 8px;
     background-color: rgba(151, 45, 251, 1);
 }
 

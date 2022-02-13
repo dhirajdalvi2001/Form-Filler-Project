@@ -26,7 +26,10 @@ const GlobalStyles = createGlobalStyle `
 `;
 
 export const StldBody = styled.div `
-    height: 600px;
+    min-height: 600px;
+    max-height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
 `
 
 export default GlobalStyles;

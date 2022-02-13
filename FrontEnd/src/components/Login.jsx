@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Route } from "react-router-dom";
 import validate from "./validate";
-import useForm from "./useForm";
+import UseForm from "./UseForm";
 import GlobalStyles, { StldBody } from "./styles/Global";
 import {
   MainContainer,
@@ -13,7 +13,7 @@ import {
 } from "./styles/StldLogin";
 
 function Login() {
-  const { handleChange, handleSubmit, values, errors } = useForm(
+  const { handleChange, handleSubmit, values, errors } = UseForm(
     submit,
     validate
   );

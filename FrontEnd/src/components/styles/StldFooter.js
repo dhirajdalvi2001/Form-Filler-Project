@@ -1,27 +1,39 @@
 import styled from "styled-components";
 
 export const StldFooter = styled.div `
-  width: 100vw;
-  height: 100px;
+  width: 100%;
+  height: 150px;
   display: flex;
   justify-content: space-evenly;
-  background-color: #330033;
+  background-color: rgba(0, 0, 0, 0.7);
 `;
 
 export const Container = styled.div `
-  width: 80px;
-  height: 100px;
+  width: 200px;
+  height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: left;
+
+  h3 {
+    font-size: 16px;
+    line-height: 30px;
+    color: rgb(251, 248, 241, 0.6);
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+  }
+
+  h3:hover {
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+  }
 
   h5 {
     font-size: 12px;
     line-height: 30px;
     color: rgb(251, 248, 241, 0.6);
-    display: flex;
-    align-items: center;
     font-weight: 700;
     transition: 0.25s;
   }
