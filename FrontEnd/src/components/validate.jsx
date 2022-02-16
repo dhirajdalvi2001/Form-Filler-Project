@@ -28,6 +28,5 @@ export default function validate(values, cpass) {
       errors.cpassword = "Passwords do not match!";
     }
   }
-
   return errors;
 }

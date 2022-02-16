@@ -12,9 +12,9 @@ const GlobalStyles = createGlobalStyle `
     body {
         width: 100%;
         height: max-content;
-        background-image: url(src/images/bg-texture.svg);
-        background-size: auto;
-    }
+        background-color: rgba(0, 0, 0, 0.2);
+        background-image: url("https://www.transparenttextures.com/patterns/broken-noise.png");
+}
 
     li {
         list-style-type: none;
@@ -26,6 +26,7 @@ const GlobalStyles = createGlobalStyle `
 `;
 
 export const StldBody = styled.div `
+    width: 100vw;
     min-height: 600px;
     max-height: fit-content;
     display: flex;

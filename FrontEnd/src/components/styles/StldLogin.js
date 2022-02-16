@@ -14,12 +14,13 @@ export const PrimaryContainer = styled.div `
 width: 450px;
 height: 500px;
 display: flex;
+background-color: rgba(0, 0, 0, 0.4);;
 flex-direction: column;
 justify-content: center;
 align-items: center;
 border: 0;
 border-radius: 12px;
-box-shadow: 0 0 50px rgb(251, 248, 241, 0.35);
+box-shadow: 0 0 50px rgb(112, 34, 183, 0.5);
 
 @media screen and (max-width: 600px) {
     flex-wrap: wrap;
@@ -96,6 +97,7 @@ input {
     border-radius: 8px;
     text-indent: 25px;
     outline: none;
+    background-color: rgba(240, 240, 240, 0.3);
 }
 
 input::placeholder {

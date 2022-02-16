@@ -5,7 +5,8 @@ export const StldFooter = styled.div `
   height: 150px;
   display: flex;
   justify-content: space-evenly;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-image: url("https://www.transparenttextures.com/patterns/black-paper.png");
+  background-color: rgba(0, 0, 0, 0.9);
 `;
 
 export const Container = styled.div `

@@ -19,6 +19,7 @@ export const BgDesktop = styled.img.attrs({
 width: 100%;
 height: auto;
 position: absolute;
+opacity: 0.6;   
 z-index: -5;
 `
 
