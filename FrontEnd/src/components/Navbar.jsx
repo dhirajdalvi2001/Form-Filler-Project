@@ -1,21 +1,40 @@
-import { Link } from "react-router-dom";
-import { StldNav } from "./styles/StldNavbar";
+import {
+  StldNav,
+  NavLink,
+  StldLogo,
+  NavItems,
+  MobileIcon,
+  NavMenu,
+} from "./styles/StldNavbar";
+import { isLoggedIn } from "./GlobalVar";
+import { useState } from "react";
+import { FaBars, FaTimes } from "react-icons/Fa";
 
 function Navbar() {
+  const [click, setClick] = useState(false);
+  function handleClick() {
+    setClick(!click);
+  }
+
   return (
     <StldNav>
-      <div>
+      <StldLogo>
         <h1>Form Filler</h1>
-      </div>
-      <div>
-        <nav>
-          <ul>
-            <Link to="/">Home</Link>
-            <Link to="/About">About</Link>
-            <Link to="/Login">Login</Link>
-          </ul>
-        </nav>
-      </div>
+      </StldLogo>
+      <MobileIcon onClick={handleClick}>
+        {click ? <FaTimes /> : <FaBars />}
+      </MobileIcon>
+      <NavMenu onClick={handleClick} click={click}>
+        <NavItems>
+          {isLoggedIn ? (
+            <NavLink to="/dashboard">Dashboard</NavLink>
+          ) : (
+            <NavLink to="/">Home</NavLink>
+          )}
+          <NavLink to="/About">About</NavLink>
+          <NavLink to="/Login">Login</NavLink>
+        </NavItems>
+      </NavMenu>
     </StldNav>
   );
 }

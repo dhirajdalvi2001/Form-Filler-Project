@@ -141,7 +141,7 @@ button:hover {
 
 export const StldLink = styled(Link)
 `
-    color: rgba(151, 45, 251, 1);
+    color: rgba(201, 155, 251, 0.8);
     transition: all 0.6s;
 
     &:hover {

@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle `
         height: max-content;
         background-color: rgba(0, 0, 0, 0.2);
         background-image: url("https://www.transparenttextures.com/patterns/broken-noise.png");
-}
+    }
 
     li {
         list-style-type: none;
@@ -23,6 +23,7 @@ const GlobalStyles = createGlobalStyle `
     a {
         text-decoration: none;
     }
+
 `;
 
 export const StldBody = styled.div `
