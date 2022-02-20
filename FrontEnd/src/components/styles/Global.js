@@ -29,7 +29,7 @@ const GlobalStyles = createGlobalStyle `
 export const StldBody = styled.div `
     width: 100vw;
     min-height: 600px;
-    max-height: fit-content;
+    max-height: max-content;
     display: flex;
     flex-wrap: wrap;
 `

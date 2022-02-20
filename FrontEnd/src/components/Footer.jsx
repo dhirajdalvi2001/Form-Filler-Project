@@ -1,4 +1,4 @@
-import { FaGithubSquare, FaLinkedin, FaTwitter } from "react-icons/Fa";
+import { FaGithubSquare } from "react-icons/Fa";
 import GlobalStyles from "./styles/Global";
 import { Container, StldFooter } from "./styles/StldFooter";
 

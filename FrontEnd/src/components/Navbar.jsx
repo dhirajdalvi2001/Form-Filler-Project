@@ -8,14 +8,20 @@ import {
   NavLogo,
 } from "./styles/StldNavbar";
 import { isLoggedIn } from "./GlobalVar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/Fa";
 
 function Navbar() {
   const [click, setClick] = useState(false);
+  const [loginStatus, setLoginStatus] = useState(false);
   function handleClick() {
     setClick(!click);
   }
+
+  useEffect(() => {
+    setLoginStatus(isLoggedIn);
+    console.log("asdasd");
+  }, [isLoggedIn]);
 
   return (
     <StldNav>
@@ -27,7 +33,7 @@ function Navbar() {
       </MobileIcon>
       <NavMenu onClick={handleClick} click={click}>
         <NavItems>
-          {isLoggedIn ? (
+          {loginStatus ? (
             <NavLink to="/dashboard">Dashboard</NavLink>
           ) : (
             <NavLink to="/">Home</NavLink>
