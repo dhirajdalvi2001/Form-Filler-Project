@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const StldFooter = styled.div `
   width: 100%;
@@ -44,3 +45,18 @@ export const Container = styled.div `
     color: rgb(255, 255, 255);
   }
 `;
+
+// export const NavLink = styled(Link)
+// `
+//   font-size: 16px;
+//   line-height: 30px;
+//   color: rgb(251, 248, 241, 0.6);
+//   display: flex;
+//   align-items: center;
+//   font-weight: 700;
+
+// &:hover {
+//   cursor: pointer;
+//   color: rgb(255, 255, 255);
+// }
+// `
