@@ -5,6 +5,7 @@ import {
   NavItems,
   MobileIcon,
   NavMenu,
+  NavLogo,
 } from "./styles/StldNavbar";
 import { isLoggedIn } from "./GlobalVar";
 import { useState } from "react";
@@ -19,7 +20,7 @@ function Navbar() {
   return (
     <StldNav>
       <StldLogo>
-        <h1>Form Filler</h1>
+        <NavLogo to="/">Form Filler</NavLogo>
       </StldLogo>
       <MobileIcon onClick={handleClick}>
         {click ? <FaTimes /> : <FaBars />}
@@ -32,7 +33,12 @@ function Navbar() {
             <NavLink to="/">Home</NavLink>
           )}
           <NavLink to="/About">About</NavLink>
-          <NavLink to="/Login">Login</NavLink>
+          {isLoggedIn && <NavLink to="/forms">Forms</NavLink>}
+          {isLoggedIn ? (
+            <NavLink to="/Account">Account</NavLink>
+          ) : (
+            <NavLink to="/Login">Login</NavLink>
+          )}
         </NavItems>
       </NavMenu>
     </StldNav>

@@ -1,21 +1,19 @@
 import GlobalStyles, { StldBody } from "./styles/Global";
-import { MainContainer, PrimaryContainer, Heading1 } from "./styles/About";
-import Footer from "../components/Footer";
+import { MainContainer, PrimaryContainer, Heading1 } from "./styles/Forms";
 
-function About() {
+function Forms() {
   return (
     <>
       <StldBody>
         <GlobalStyles />
         <MainContainer>
           <PrimaryContainer>
-            <Heading1>About</Heading1>
+            <Heading1>Forms</Heading1>
           </PrimaryContainer>
         </MainContainer>
       </StldBody>
-      <Footer />
     </>
   );
 }
 
-export default About;
+export default Forms;

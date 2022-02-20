@@ -63,10 +63,10 @@ font-weight: 700;
 letter-spacing: 3px;
 border: 0;
 border-radius: 8px;
-background-color: rgba(243,242,90,255);
+background-color: rgba(0, 0, 0, 0.2);
 color: rgba(0, 0, 0, 0.5);
 outline: none;
-transition: all 0.6s;
+transition: all 0.4s;
 
 &:hover {
     cursor: pointer;

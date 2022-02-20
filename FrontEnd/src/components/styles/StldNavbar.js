@@ -15,13 +15,35 @@ color: rgb(251, 248, 241, 0.8);
 `
 
 export const StldLogo = styled.div `
-    padding:  0 40px;
+    padding: 0;
+    height: 40px;
     color: rgb(251, 248, 241, 0.6);
     transition: all 0.6s;
 
     &:hover {
     cursor: pointer;
     color: rgba(255, 255, 255, 0.75);
+    }
+`
+
+export const NavLogo = styled(Link)
+`
+    display: flex;
+    width: 150px;
+    height: 100%;
+    font-size: 20px;
+    justify-content: center;
+    padding:  10px 0px;
+    font-weight: 700;
+    text-decoration: none;
+    color: rgb(255, 255, 255, 0.4);
+    border-radius: 8px;
+    transition: all 1s;
+
+    &:hover {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.95);
+    transition: all 0.3s ease;
     }
 `
 
@@ -44,13 +66,15 @@ display: flex;
 align-items: center;
 list-style: none;
 text-align: center;
+height: 40px;
 
 @media screen and (max-width:900px){
+overflow: hidden;
 display: flex;
 flex-direction: column;
-width: 80%;
-height: 90vh;
-font-size: 24px;
+width: 100%;
+height: 100vh;
+font-size: 18px;
 position: absolute;
 top: 40px;
 left: ${({ click }) => (click ? 0 : "-100%")};
@@ -67,33 +91,33 @@ height: 100%;
 @media screen and (max-width:900px){
 display: flex;
 flex-direction: column;
-justify-content: space-evenly;
 width: 100%;
-
 }
 `
 
 export const NavLink = styled(Link)
 `
     display: flex;
-    padding:  10px 20px;
+    width: 120px;
+    text-align: center;
+    justify-content: center;
+    padding:  10px 0px;
     font-weight: 700;
     text-decoration: none;
-    color: rgb(251, 248, 241, 0.6);
-    // background-color: rgba(0, 0, 0, 0.1);
+    color: rgb(255, 255, 255, 0.4);
     border-radius: 8px;
-    transition: all 0.6s;
+    transition: all 1s;
 
     &:hover {
     cursor: pointer;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.95);
     transition: all 0.3s ease;
     }
 
     @media screen and (max-width:900px){
-        margin: auto;
+        margin: 30px auto;
         text-align: center;
-        width: 10%;
+        width: 50%;
         display: table;
         padding: 10px 40px;
         background-color: rgba(0, 0, 0, 0.3);

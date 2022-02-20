@@ -20,7 +20,7 @@ justify-content: center;
 align-items: center;
 border: 0;
 border-radius: 12px;
-box-shadow: 0 0 50px rgb(112, 34, 183, 0.5);
+box-shadow: 0 0 50px rgb(255, 255, 255, 0.5);
 
 @media screen and (max-width: 600px) {
     flex-wrap: wrap;
@@ -118,7 +118,7 @@ button {
     letter-spacing: 3px;
     border: 0;
     border-radius: 8px;
-    background-color: rgb(112, 34, 183, 1);
+    background-color: rgba(0, 0, 0, 0.8);
     color: rgba(255, 255, 255, 0.75);
     outline: none;
     transition: all 0.6s;
@@ -126,7 +126,7 @@ button {
 
 button:hover {
     letter-spacing: 8px;
-    background-color: rgba(151, 45, 251, 1);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 @media screen and (max-width: 600px) {
