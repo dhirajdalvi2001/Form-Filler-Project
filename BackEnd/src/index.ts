@@ -2,7 +2,7 @@ import {
   addUser,
   deleteUser,
   updateUser,
-  UserController,
+  userLogIn,
 } from "./controller/UserController";
 import { UserData, UserDataModel } from "./entity/UserData";
 import "reflect-metadata";
@@ -42,7 +42,7 @@ const PORT = process.env.PORT || 3000;
 import { UserModel } from "./entity/User";
 import { connect } from "mongoose";
 
-const userController = new UserController();
+// const userController = new UserController();
 
 (async () => {
   let con = await connect("mongodb://127.0.0.1:5000/newtest");
@@ -79,11 +79,11 @@ const userController = new UserController();
     );
   });
 
-  app.get("/findOne/:id", userController.findById);
+  // app.get("/findOne/:id", userController.findById);
   app.post("/adduser", addUser);
   app.post("/deleteuser", deleteUser);
   app.post("/updateuser", updateUser);
-  app.post("/login", userController.login);
+  app.post("/login", userLogIn);
 
   app.listen(3000, () => {
     console.log("app running on http://127.0.0.1:3000");

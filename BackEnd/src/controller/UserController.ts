@@ -89,7 +89,7 @@ export const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
-const userLogIn = async (req: Request, res: Response) => {
+export const userLogIn = async (req: Request, res: Response) => {
   let user: User = req.body.user;
   let returnedResponse: ResType;
 
