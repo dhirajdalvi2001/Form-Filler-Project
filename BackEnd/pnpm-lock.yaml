@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@types/express': ^4.17.13
   '@types/node': ^8.0.29
+  dotenv: ^16.0.0
   express: ^4.17.2
   mongodb: ^3.0.8
   mongoose: ^6.2.0
@@ -12,6 +13,7 @@ specifiers:
   typescript: 3.3.3333
 
 dependencies:
+  dotenv: 16.0.0
   express: 4.17.2
   mongodb: 3.7.3
   mongoose: 6.2.0
@@ -445,6 +447,11 @@ packages:
     dependencies:
       is-obj: 2.0.0
     dev: true
+
+  /dotenv/16.0.0:
+    resolution: {integrity: sha512-qD9WU0MPM4SWLPJy/r2Be+2WgQj8plChsyrCNQzW/0WjvcJQiKQJ9mH3ZgB3fxbUUxgc/11ZJ0Fi5KiimWGz2Q==}
+    engines: {node: '>=12'}
+    dev: false
 
   /duplexer3/0.1.4:
     resolution: {integrity: sha1-7gHdHKwO08vH/b6jfcCo8c4ALOI=}

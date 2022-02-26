@@ -1,10 +1,15 @@
+import {
+  addUser,
+  deleteUser,
+  updateUser,
+  UserController,
+} from "./controller/UserController";
 import { UserData, UserDataModel } from "./entity/UserData";
 import "reflect-metadata";
-// import { createConnection } from "typeorm";
-// import { User } from "./entity/User";
 import express from "express";
-import { type } from "os";
+import dotenv from "dotenv";
 
+dotenv.config();
 const app = express();
 // let routes = express.Router();
 
@@ -18,7 +23,7 @@ const app = express();
 //   res.send("clg form page");
 // });
 
-let port = 3000;
+const PORT = process.env.PORT || 3000;
 
 // let users: User[];
 // createConnection()
@@ -37,37 +42,48 @@ let port = 3000;
 import { UserModel } from "./entity/User";
 import { connect } from "mongoose";
 
+const userController = new UserController();
+
 (async () => {
   let con = await connect("mongodb://127.0.0.1:5000/newtest");
-  const newUser = new UserModel({
-    email: "3hello",
-    password: "2newpass",
-  });
+  // const newUser = new UserModel({
+  //   email: "3hello",
+  //   password: "2newpass",
+  // });
 
-  const newuserdata = new UserDataModel({});
-  const newud = await newuserdata.save();
+  // const newuserdata = new UserDataModel({});
+  // const newud = await newuserdata.save();
 
-  newUser.userData = newud.id;
+  // newUser.userData = newud.id;
 
   // console.log(con);
 
-  const t = await newUser.save();
+  // const t = await newUser.save();
 
   // console.log(t);
 
-  let users = UserModel.find({});
-  console.log(users);
+  let users = await UserModel.find({});
+  // let { _id, email, password, userData } = users[2];
+  // console.log(`${_id}  ${email}  ${password}  ${userData}`);
 
   app.use(express.json());
 
-  app.get("/", (req, res) => {
+  app.get("/", async (req, res) => {
     console.log(req.ip);
-    let rees = "nothing here";
+    let users = await UserModel.find({});
+
+    let rees = users; //JSON.stringify(users);
     let styling = `<css>body{ background-color:black; color:white }</css> `;
     res.send(
       `<body style=\" background-color:black;color:white \"> ${rees}</body> `
     );
   });
+
+  app.get("/findOne/:id", userController.findById);
+  app.post("/adduser", addUser);
+  app.post("/deleteuser", deleteUser);
+  app.post("/updateuser", updateUser);
+  app.post("/login", userController.login);
 
   app.listen(3000, () => {
     console.log("app running on http://127.0.0.1:3000");

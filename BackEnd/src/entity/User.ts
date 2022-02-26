@@ -4,7 +4,7 @@ import { UserData } from "./UserData";
 export interface User {
   email: string;
   password: string;
-  authCount: number;
+  authCount?: number;
   userData?: Schema.Types.ObjectId;
   parentData?: Schema.Types.ObjectId;
   formData?: Schema.Types.ObjectId;
