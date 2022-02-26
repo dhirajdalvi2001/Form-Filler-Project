@@ -18,9 +18,24 @@ function Body() {
         <Route exact path="/dashboard" element={<Dashboard />}></Route>
         <Route exact path="/account" element={<Account />}></Route>
         <Route exact path="/forms" element={<Forms />}></Route>
+        <Route path='*' element={<My404Component/>} />
       </Routes>
     </>
   );
 }
 
 export default Body;
+
+function My404Component() {
+  return <div style={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    fontSize: "1.4rem",
+    textTransform: "uppercase",
+    color: "rgba(0, 0, 0, 0.3)",
+  }}>
+    <h1>404: Page Not Found</h1>
+  </div>
+}

@@ -5,7 +5,6 @@ function Forms() {
   return (
     <>
       <StldBody>
-        <GlobalStyles />
         <MainContainer>
           <PrimaryContainer>
             <Heading1>Forms</Heading1>

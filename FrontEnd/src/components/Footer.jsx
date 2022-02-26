@@ -1,11 +1,10 @@
-import { FaGithubSquare } from "react-icons/Fa";
+import { FaGithubSquare } from "react-icons/fa";
 import GlobalStyles from "./styles/Global";
 import { Container, StldFooter } from "./styles/StldFooter";
 
 function Footer() {
   return (
     <>
-      <GlobalStyles />
       <StldFooter>
         <Container>
           <h3>Form Filler</h3>

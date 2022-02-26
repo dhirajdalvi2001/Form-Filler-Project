@@ -11,25 +11,31 @@ import {
   SecondaryContainer,
   StldLink,
 } from "./styles/StldLogin";
+import { useContext } from "react";
+import { loginContext } from "./App";
 
 function Login() {
   const { handleChange, handleSubmit, values, errors } = UseForm(
     submit,
     validate
   );
+  let logInValue = useContext(loginContext);
   let navigateTo = useNavigate();
+
+  function handleKeyPress(e) {
+    if (e.keyCode === 13) {
+      handleSubmit();
+    }
+  }
 
   function submit() {
     navigateTo("/dashboard");
-    changeLoginToTrue();
-    console.log("Submitted Successfully");
   }
   //                                                                      HTML
   return (
     <>
       <StldBody>
         <MainContainer>
-          <GlobalStyles />
           <PrimaryContainer>
             <SecondaryContainer>
               <Heading>
@@ -37,7 +43,11 @@ function Login() {
                 <h2>Login To Get Started</h2>
               </Heading>
               <Form1>
-                <form onSubmit={(e) => handleSubmit(e, false)} noValidate>
+                <form
+                  onKeyPress={handleKeyPress}
+                  onSubmit={(e) => handleSubmit(e, false)}
+                  noValidate
+                >
                   <input
                     className={`${errors.email && "inputError"}`}
                     type="email"
@@ -60,7 +70,7 @@ function Login() {
                     autoComplete="off"
                   />
                   {errors.password && <h6>{errors.password}</h6>}
-                  <button type="submit">LOGIN</button>
+                  <button type="submit" onClick={() => logInValue.changeLogin(true)}>LOGIN</button>
                   <div className="bottom">
                     <h5>
                       Don't have an account? &nbsp;

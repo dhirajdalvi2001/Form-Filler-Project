@@ -29,7 +29,6 @@ function Signup() {
     <>
       <StldBody>
         <MainContainer>
-          <GlobalStyles />
           <PrimaryContainer>
             <SecondaryContainer>
               <Heading>

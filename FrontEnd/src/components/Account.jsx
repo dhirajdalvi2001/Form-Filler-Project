@@ -5,7 +5,6 @@ function Account() {
   return (
     <>
       <StldBody>
-        <GlobalStyles />
         <MainContainer>
           <PrimaryContainer>
             <Heading1>Account</Heading1>

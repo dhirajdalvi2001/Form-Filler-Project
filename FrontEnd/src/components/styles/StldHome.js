@@ -1,35 +1,18 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import bgdesktop from "../../images/bg-desktop.jpg"
-
-export const ImgContainer = styled.div `
-width: 100vw;
-height: 100%;
-display: flex;
-`
 
 export const ContentContainer = styled.div `
-margin: 150px auto;
-width: 40%;
+margin: auto;
+width: 600px;
 
-@media screen and (max-width: 700px) and (min-width: 500px) {
-width: 60%;
-}
-
-@media screen and (max-width: 500px) and (min-width: 200px) {
+@media screen and (max-width: 700px) and (min-width: 550px) {
 width: 80%;
 }
-`
 
-export const BgDesktop = styled.img.attrs({
-    src: `${bgdesktop}`
-})
-`
-width: 100%;
-height: auto;
-position: absolute;
-opacity: 1;   
-z-index: -5;
+@media screen and (max-width: 550px) and (min-width: 200px) {
+margin: 50% auto;
+width: 88%;
+}
 `
 
 export const Heading1 = styled.h1 `
@@ -42,16 +25,30 @@ font-weight: 300;
 letter-spacing: 2px;
 line-height: 40px;
 
-@media screen and (max-width: 900px) {
-font-size: 20px;
-line-height: 20px;
+@media screen and (max-width: 700px) and (min-width: 550px) {
+font-size: 26px;
+line-height: 36px;
+}
+
+@media screen and (max-width: 550px) and (min-width: 250px) {
+width: 100%;
 }
 `
 
 export const Buttons = styled.div `
+margin: auto;
+width: 60%;
 height: 100px;
 display: flex;
 flex-wrap: wrap;
+
+@media screen and (max-width: 700px) and (min-width: 550px) {
+width: 100%;
+}
+
+@media screen and (max-width: 550px) and (min-width: 250px) {
+width: 100%;
+}
 `
 
 export const HomeButton = styled.button `
@@ -71,17 +68,30 @@ transition: all 0.4s;
 &:hover {
     cursor: pointer;
     letter-spacing: 5px;
-    color: rgba(0, 0, 0, 0.85);
-    background-color: rgba(255, 254, 52, 1);    
-    box-shadow: 0 0 10px 1px rgba(247, 246, 140, 1);
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(0, 0, 0, 0.65);    
+    box-shadow: 0 0 10px 1px rgba(255, 255, 255, 0.75);
 }
 
-@media screen and (max-width: 900px) {
-width: 100px;
-line-height: 20px;
+@media screen and (max-width: 700px) and (min-width: 550px) {
+width: 80%;
+}
+
+@media screen and (max-width: 550px) and (min-width: 250px) {
+width: 80%;
 }
 `
 export const StldLink = styled(Link)
 `
 margin: auto;
+width: 50%;
+display: flex;
+
+@media screen and (max-width: 700px) and (min-width: 550px) {
+    width: 50%;
+    }
+    
+    @media screen and (max-width: 550px) and (min-width: 250px) {
+    width: 50%;
+    }
 `

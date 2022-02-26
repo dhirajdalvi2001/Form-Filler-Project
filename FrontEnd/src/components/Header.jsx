@@ -1,10 +1,11 @@
 import Navbar from "./Navbar";
+import { isLoggedIn } from "./GlobalVar";
+import { useState } from "react";
 
 function Header() {
+
   return (
-    <div className="header">
       <Navbar />
-    </div>
   );
 }
 export default Header;

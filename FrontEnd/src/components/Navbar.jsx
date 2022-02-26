@@ -7,21 +7,18 @@ import {
   NavMenu,
   NavLogo,
 } from "./styles/StldNavbar";
-import { isLoggedIn } from "./GlobalVar";
-import { useEffect, useState } from "react";
-import { FaBars, FaTimes } from "react-icons/Fa";
+// import { isLoggedIn } from "./GlobalVar";
+import { useState, useContext } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { loginContext } from "./App";
 
-function Navbar() {
+function Navbar(props) {
+  let logInValue = useContext(loginContext);
+  const login = logInValue.login;
   const [click, setClick] = useState(false);
-  const [loginStatus, setLoginStatus] = useState(false);
   function handleClick() {
     setClick(!click);
   }
-
-  useEffect(() => {
-    setLoginStatus(isLoggedIn);
-    console.log("asdasd");
-  }, [isLoggedIn]);
 
   return (
     <StldNav>
@@ -33,18 +30,10 @@ function Navbar() {
       </MobileIcon>
       <NavMenu onClick={handleClick} click={click}>
         <NavItems>
-          {loginStatus ? (
-            <NavLink to="/dashboard">Dashboard</NavLink>
-          ) : (
-            <NavLink to="/">Home</NavLink>
-          )}
+          {login  ? (<NavLink to="/dashboard">Dashboard</NavLink>) : (<NavLink to="/">Home</NavLink>)}
           <NavLink to="/About">About</NavLink>
-          {isLoggedIn && <NavLink to="/forms">Forms</NavLink>}
-          {isLoggedIn ? (
-            <NavLink to="/Account">Account</NavLink>
-          ) : (
-            <NavLink to="/Login">Login</NavLink>
-          )}
+          <NavLink to="/forms">Forms</NavLink>
+          {login  ? (<NavLink to="/Account">Account</NavLink>) : (<NavLink to="/Login">Login</NavLink>)}
         </NavItems>
       </NavMenu>
     </StldNav>

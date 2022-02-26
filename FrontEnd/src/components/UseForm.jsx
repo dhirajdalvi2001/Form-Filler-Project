@@ -22,9 +22,9 @@ const UseForm = (callback, validate) => {
     setErrors(validate(values, cpass));
     setIsSubmitting(true);
     const data = new FormData(e.target);
-    console.log(Object.fromEntries(data.entries()));
+    // console.log(Object.fromEntries(data.entries()));
   };
-
+  
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
       callback();

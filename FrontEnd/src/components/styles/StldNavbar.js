@@ -7,6 +7,8 @@ border-style: hidden hidden solid hidden;
 width: 100%;    
 height: 40px;
 display: flex;
+justify-content: center;
+align-items: center;
 flex-wrap: wrap;
 justify-content: space-between;
 background-image: url("https://www.transparenttextures.com/patterns/black-paper.png");
@@ -56,7 +58,6 @@ display: none;
     top: 0;
     right: 0;
     transform: translate(-100%, 60%);
-    font-size: 20px;
     cursor: pointer;
 }
 `
@@ -81,6 +82,7 @@ left: ${({ click }) => (click ? 0 : "-100%")};
 opacity: 0.95;
 transition: all 0.5s ease;
 background-color: rgba(50, 50, 50, 1);
+z-index: 5;
 }
 `
 
@@ -123,4 +125,32 @@ export const NavLink = styled(Link)
         background-color: rgba(0, 0, 0, 0.3);
         }
 
+`
+
+export const NavHeading = styled.div `
+display: flex;
+width: 120px;
+text-align: center;
+justify-content: center;
+padding:  10px 0px;
+font-weight: 700;
+text-decoration: none;
+color: rgb(255, 255, 255, 0.4);
+border-radius: 8px;
+transition: all 1s;
+
+&:hover {
+cursor: pointer;
+color: rgba(255, 255, 255, 0.95);
+transition: all 0.3s ease;
+}
+
+@media screen and (max-width:900px){
+    margin: 30px auto;
+    text-align: center;
+    width: 50%;
+    display: table;
+    padding: 10px 40px;
+    background-color: rgba(0, 0, 0, 0.3);
+    }
 `
