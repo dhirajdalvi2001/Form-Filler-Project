@@ -3,7 +3,7 @@ import About from "../About/About";
 import Login from "../Login/Login";
 import Home from "../Home/Home";
 import "./Body.css";
-import Signup from "../Signup/Signup";
+import Signup from "../Login/Signup";
 
 function Body() {
   return (

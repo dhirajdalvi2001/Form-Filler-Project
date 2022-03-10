@@ -1,18 +1,15 @@
-import "./Form.css";
+import "../Login/Form.css";
 import { Link } from "react-router-dom";
 import useForm from "./useForm";
 import validate from "./validate";
 
-function Login() {
+function Signup() {
   const { handleChange, handleSubmit, values, errors } = useForm(
     submit,
     validate
   );
   function submit() {
     console.log("Submitted Successfully");
-    <Route exact path="/">
-      {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />}
-    </Route>;
   }
   //                                                                      HTML
   return (
@@ -23,7 +20,7 @@ function Login() {
           <h2>Login To Get Started</h2>
         </div>
         <div className="form1">
-          <form onSubmit={(e) => handleSubmit(e, false)} noValidate>
+          <form onSubmit={(e) => handleSubmit(e, true)} noValidate>
             <input
               className={`${errors.email && "inputError"}`}
               type="email"
@@ -46,12 +43,23 @@ function Login() {
               autoComplete="off"
             />
             {errors.password && <h6>{errors.password}</h6>}
-            <button type="submit">LOGIN</button>
+            <input
+              className={`${errors.cpassword && "inputError"}`}
+              type="password"
+              name="cpassword"
+              id="cpassword"
+              values={values.cpassword}
+              onChange={handleChange}
+              placeholder="Confirm Password"
+              autoComplete="off"
+            />
+            {errors.cpassword && <h6>{errors.cpassword}</h6>}
+            <button type="submit">SIGN UP</button>
             <div className="bottom">
               <h5>
-                Don't have an account?{" "}
-                <Link to="/Sign-up" className="switch-page">
-                  Sign Up
+                Already have an account?{" "}
+                <Link to="/Login" className="switch-page">
+                  Login
                 </Link>
               </h5>
             </div>
@@ -61,4 +69,4 @@ function Login() {
     </div>
   );
 }
-export default Login;
+export default Signup;
