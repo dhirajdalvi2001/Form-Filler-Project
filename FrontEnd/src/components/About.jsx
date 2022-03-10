@@ -5,7 +5,7 @@ import {
   Heading1,
   ContentBox,
 } from "./styles/About";
-import { about } from "./arrays/AboutPageInfo";
+import { AboutPageInfo } from "./arrays/AboutPageInfo";
 import Card from "./Card";
 import Footer from "../components/Footer";
 
@@ -15,7 +15,6 @@ function About() {
     return <Card
     key={e.id}
     name={e.title}
-    src={e.imgURL}
     content={e.content}
      />
   }
@@ -27,7 +26,7 @@ function About() {
           <PrimaryContainer>
             <Heading1>About</Heading1>
             <ContentBox>
-              {about.map(createCard)}
+              {AboutPageInfo.map(createCard)}
             </ContentBox>
           </PrimaryContainer>
         </MainContainer>

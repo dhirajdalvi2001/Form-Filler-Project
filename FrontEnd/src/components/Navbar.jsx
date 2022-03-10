@@ -6,7 +6,7 @@ import {
   MobileIcon,
   NavMenu,
   NavLogo,
-} from "./styles/StldNavbar";
+} from "./styles/Navbar";
 // import { isLoggedIn } from "./GlobalVar";
 import { useState, useContext } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";

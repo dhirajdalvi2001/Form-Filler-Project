@@ -6,7 +6,7 @@ import {
   Buttons,
   ContentContainer,
   StldLink,
-} from "./styles/StldHome";
+} from "./styles/Home";
 
 function Home() {
   return (
