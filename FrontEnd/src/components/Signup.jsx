@@ -10,7 +10,7 @@ import {
   Form1,
   SecondaryContainer,
   StldLink,
-} from "./styles/StldLogin";
+} from "./styles/Login";
 
 function Signup() {
   let navigateTo = useNavigate();

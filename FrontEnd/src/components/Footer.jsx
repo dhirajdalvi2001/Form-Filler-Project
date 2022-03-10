@@ -1,6 +1,6 @@
 import { FaGithubSquare } from "react-icons/fa";
 import GlobalStyles from "./styles/Global";
-import { Container, StldFooter } from "./styles/StldFooter";
+import { Container, StldFooter } from "./styles/Footer";
 
 function Footer() {
   return (

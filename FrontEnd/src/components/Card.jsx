@@ -29,12 +29,6 @@ function Card(props) {
     <StldCard>
         <Title>
         <h2>{props.name}</h2>
-            {/* <Icon>
-            <img 
-            src={props.src}
-            alt={props.name}
-            />
-            </Icon> */}
         </Title>
         <StldContent>
         <Text>

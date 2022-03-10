@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import validate from "./validate";
 import UseForm from "./UseForm";
-import GlobalStyles, { StldBody } from "./styles/Global";
-import { changeLoginToTrue, isLoggedIn } from "./GlobalVar";
+import { StldBody } from "./styles/Global";
 import {
   MainContainer,
   PrimaryContainer,
@@ -10,7 +9,7 @@ import {
   Form1,
   SecondaryContainer,
   StldLink,
-} from "./styles/StldLogin";
+} from "./styles/Login";
 import { useContext } from "react";
 import { loginContext } from "./App";
 
