@@ -14,6 +14,10 @@ box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 text-align: left;
 overflow: hidden;
 
+&:hover {
+    cursor: pointer;
+}
+
 @media screen and (max-width: 710px) {
     margin: 20px;
     min-width: 320px;

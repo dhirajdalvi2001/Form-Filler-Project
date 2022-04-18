@@ -7,4 +7,9 @@ position: fixed;
 right: 2vw;
 bottom: 2vw;
 scroll-behavior: smooth;
+opacity: 0.2;
+
+&:hover {
+    opacity: 1;
+}
 `

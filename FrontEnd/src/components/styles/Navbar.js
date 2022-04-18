@@ -72,11 +72,12 @@ height: 40px;
 @media screen and (max-width:900px){
 overflow: hidden;
 display: flex;
+position: absolute;
 flex-direction: column;
 width: 100%;
 height: 100vh;
+max-height: max-content;
 font-size: 18px;
-position: absolute;
 top: 40px;
 left: ${({ click }) => (click ? 0 : "-100%")};
 opacity: 0.95;

@@ -26,9 +26,28 @@ text-transform: uppercase;
 color: rgba(230, 230, 230, 0.6);
 `
 
+export const Heading3 = styled.h3 `
+margin: 20vh auto;
+width: fit-content;
+display: flex;
+font-size: 60px;
+text-align: center;
+text-transform: uppercase;
+color: rgba(230, 230, 230, 0.6);
+`
+
+export const FormsBox = styled.div`
+width: 100%;
+height: 50%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+`
+
 export const ContentBox = styled.div`
 width: 100%;
-height: fit-content;
+min-height: fit-content%;
+height: 2150px;
 max-height: max-content;
 display: flex;
 
@@ -64,7 +83,7 @@ height: fit-content;
 export const InputField = styled.div`
 min-width: 300px;
 width: 30%;
-height: fit-content;
+height: 100%;
 max-height: max-content;
 border-radius: 8px;
 background-color: rgba(0, 0, 0, 0.1);
@@ -79,6 +98,7 @@ background-color: rgba(0, 0, 0, 0.1);
 }
 
 form {
+    margin: 0 auto 20px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -135,7 +155,7 @@ form {
 
 export const FormField = styled.div`
 width: 70%;
-height: auto;
+height: 100%;
 max-height: max-content;
 border-radius: 12px;
 background-color: rgba(0, 0, 0, 0.1);
@@ -147,7 +167,6 @@ background-color: rgba(0, 0, 0, 0.1);
 
 @media screen and (max-width: 600px) {
     width: 100%;
-    height: 100vh;
 }
 `
 
@@ -157,13 +176,54 @@ height: auto;
 display: flex;
 `
 
-export const ChangePage = styled.div`
+export const PDFMenu = styled.div`
 width: 100%;
-height: 40px;
+height: 30px;
+display: flex;
 background-color: rgba(0, 0, 0, 0.1);
+justify-content: center;
+align-items: center;
+border-radius: 12px;
+`
+
+export const ChangePage = styled.div`
+cursor: pointer;
+width: 30px;
+height: 30px;
 display: flex;
 justify-content: center;
 align-items: center;
-font-size: 40px;
+font-size: 36px;
 color: rgba(255, 255, 255, 0.5);
+border-radius: 12px;
+transition: 0.6s all;
+
+&:hover {
+    background-color: rgba(0, 0, 0, 0.75);
+    color: rgba(255, 255, 255, 1);
+}
+`
+
+export const DownloadButton = styled.button`
+cursor: pointer;
+margin: 20px auto;
+/* min-width: 350px; */
+width: 200px;
+height: 50px;
+display: flex;
+justify-content: center;
+align-items: center;
+border: 0;
+border-radius: 12px;
+color: rgba(255, 255, 255, 0.4);
+background-color: rgba(0, 0, 0, 0.15);
+font-size: 18px;
+font-weight: 700;
+text-transform: uppercase;
+transition: 0.6s all;
+
+&:hover {
+    background-color: rgba(0, 0, 0, 0.75);
+    color: rgba(255, 255, 255, 0.8);
+}
 `

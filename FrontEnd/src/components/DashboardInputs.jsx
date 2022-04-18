@@ -6,10 +6,10 @@ import { SecondaryInfo } from "./arrays/SecondaryInfo";
 import { SeniorSecondaryInfo } from "./arrays/SeniorSecondaryInfo";
 import { DiplomaInfo } from "./arrays/DiplomaInfo";
 import { GraduationInfo } from "./arrays/GraduationInfo";
-import { InputMain, Inputs, SecondaryInputField } from "./styles/Forms";
+import { InputMain, Inputs } from "./styles/Dashboard";
 import Input from "./Input";
 
-function FormsInput() {
+function DashboardInputs() {
     function createInputContainer(e) {
         return (
             <Input 
@@ -25,8 +25,8 @@ function FormsInput() {
         );
     }
     return (
-        <form name="admissionForm" action="" id="admissionForm" method="post">
           <InputMain>
+        <form>
             <Inputs>
               <h2 className="heading2">Personal Info:</h2>
               {PersonalInfo.map(createInputContainer)}
@@ -41,7 +41,7 @@ function FormsInput() {
               <h2 className="heading2">Mother's Info:</h2>
               {MothersInfo.map(createInputContainer)}
             </Inputs>
-            
+
             <Inputs>
               <h2 className="heading2">Local Guardian's Info:</h2>
               {LocalGuardiansInfo.map(createInputContainer)}
@@ -56,19 +56,19 @@ function FormsInput() {
               <h2 className="heading2">Senior Secondary Info:</h2>
               {SeniorSecondaryInfo.map(createInputContainer)}
             </Inputs>
-              
+            
             <Inputs>
               <h2 className="heading2">Diploma Info:</h2>
               {DiplomaInfo.map(createInputContainer)}
             </Inputs>
-              
+            
             <Inputs>
               <h2 className="heading2">GRADUATION Info:</h2>
               {GraduationInfo.map(createInputContainer)}
             </Inputs>
-          </InputMain>
         </form>
+          </InputMain>
     );
 }
 
-export default FormsInput;
+export default DashboardInputs;

@@ -2,10 +2,12 @@ import { InputContainer } from "./styles/Forms";
 import { FormContext } from "./Forms";
 import { useContext } from "react";
 import { ShouldPDFContext } from "./Forms";
+import { UploadDataContext } from "./Forms";
 
 function Input(props) {
     const FormData = useContext(FormContext);
     const PDFUpdate = useContext(ShouldPDFContext)
+    const UpdateData = useContext(UploadDataContext)
     return (
     <InputContainer>
         <h3 className="heading3">{props.placeholder}</h3>
@@ -26,6 +28,8 @@ function Input(props) {
                     ...FormData.formData,
                 })
                 PDFUpdate.setPDFUpdate(true);
+                // UpdateData.setUpdateData
+                
             }}
         />
     </InputContainer>

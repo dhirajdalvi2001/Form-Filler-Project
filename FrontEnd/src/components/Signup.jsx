@@ -1,8 +1,7 @@
 import validate from "./validate";
 import { useNavigate } from "react-router-dom";
 import UseForm from "./UseForm";
-import GlobalStyles, { StldBody } from "./styles/Global";
-import { changeLoginToTrue, isLoggedIn } from "./GlobalVar";
+import { StldBody } from "./styles/Global";
 import {
   MainContainer,
   PrimaryContainer,
@@ -21,7 +20,6 @@ function Signup() {
 
   function submit() {
     navigateTo("/dashboard");
-    changeLoginToTrue();
     console.log("Submitted Successfully");
   }
   //                                                                      HTML

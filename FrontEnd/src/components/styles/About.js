@@ -3,7 +3,9 @@ import styled from "styled-components";
 export const MainContainer = styled.div `
 margin: auto;
 width: 90%;
-height: auto;
+height: fit-content;
+max-height: max-content;
+display: flex;
 `
 
 export const PrimaryContainer = styled.div `
