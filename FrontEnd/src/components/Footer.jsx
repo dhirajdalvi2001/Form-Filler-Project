@@ -1,0 +1,52 @@
+import { FaGithubSquare } from "react-icons/fa";
+import GlobalStyles from "./styles/Global";
+import { Container, StldFooter } from "./styles/Footer";
+
+function Footer() {
+  return (
+    <>
+      <StldFooter>
+        <Container>
+          <h3>Form Filler</h3>
+          <h5>Home</h5>
+          <h5>About</h5>
+          <h5>Forms</h5>
+          <h5>Login</h5>
+        </Container>
+        <Container>
+          <h3>Members</h3>
+          <h5>Saurabh Patil</h5>
+          <h5>Parikshit Thale</h5>
+          <h5>Amaan Khan</h5>
+          <h5>Dhiraj Dalvi</h5>
+        </Container>
+        <Container>
+          <h3>Socials</h3>
+          <h5>
+            <FaGithubSquare />
+            &nbsp; /Saurabh
+          </h5>
+          <h5>
+            <FaGithubSquare />
+            &nbsp; /Parikshit
+          </h5>
+          <h5>
+            <FaGithubSquare />
+            &nbsp; /Dhiraj
+          </h5>
+          <h5>
+            <FaGithubSquare />
+            &nbsp; /Amaan
+          </h5>
+        </Container>
+        <Container>
+          <h3>Account</h3>
+          <h5>Register</h5>
+          <h5>Login</h5>
+        </Container>
+      </StldFooter>
+    </>
+  );
+}
+
+export default Footer;
