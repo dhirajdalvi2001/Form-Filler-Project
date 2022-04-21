@@ -8,21 +8,17 @@ function Footer() {
       <StldFooter>
         <Container>
           <h3>Form Filler</h3>
+          <h5>Home</h5>
           <h5>About</h5>
-          <h5>Contact</h5>
+          <h5>Forms</h5>
           <h5>Login</h5>
         </Container>
         <Container>
-          <h3>Group Members</h3>
+          <h3>Members</h3>
           <h5>Saurabh Patil</h5>
           <h5>Parikshit Thale</h5>
+          <h5>Amaan Khan</h5>
           <h5>Dhiraj Dalvi</h5>
-        </Container>
-        <Container>
-          <h3>Account</h3>
-          <h5>Open An Account</h5>
-          <h5>Settings</h5>
-          <h5>Change Password</h5>
         </Container>
         <Container>
           <h3>Socials</h3>
@@ -38,6 +34,15 @@ function Footer() {
             <FaGithubSquare />
             &nbsp; /Dhiraj
           </h5>
+          <h5>
+            <FaGithubSquare />
+            &nbsp; /Amaan
+          </h5>
+        </Container>
+        <Container>
+          <h3>Account</h3>
+          <h5>Register</h5>
+          <h5>Login</h5>
         </Container>
       </StldFooter>
     </>

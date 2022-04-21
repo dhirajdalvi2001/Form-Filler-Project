@@ -5,7 +5,6 @@ function Card(props) {
 
     const LongText = ({ content,limit}) => {
         const [showAll, setShowAll] = useState(false);
-      
         const showMore = () => setShowAll(true);
         const showLess = () => setShowAll(false);
       

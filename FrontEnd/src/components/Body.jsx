@@ -4,7 +4,6 @@ import Login from "./Login";
 import Home from "./Home";
 import Signup from "./Signup";
 import Dashboard from "./Dashboard";
-import Account from "./Account";
 import Forms from "./Forms";
 
 function Body() {
@@ -16,7 +15,6 @@ function Body() {
         <Route exact path="/login" element={<Login />}></Route>
         <Route exact path="/sign-up" element={<Signup />}></Route>
         <Route exact path="/dashboard" element={<Dashboard />}></Route>
-        <Route exact path="/account" element={<Account />}></Route>
         <Route exact path="/forms" element={<Forms />}></Route>
         <Route path='*' element={<My404Component/>} />
       </Routes>

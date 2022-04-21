@@ -33,7 +33,7 @@ function Navbar(props) {
           {login  ? (<NavLink to="/dashboard">Dashboard</NavLink>) : (<NavLink to="/">Home</NavLink>)}
           <NavLink to="/About">About</NavLink>
           <NavLink to="/forms">Forms</NavLink>
-          {login  ? (<NavLink to="/Account">Account</NavLink>) : (<NavLink to="/Login">Login</NavLink>)}
+          {login  ? (<NavLink to="/" onClick={() => { logInValue.setLogin(false) }}>Logout</NavLink>) : (<NavLink to="/Login">Login</NavLink>)}
         </NavItems>
       </NavMenu>
     </StldNav>
