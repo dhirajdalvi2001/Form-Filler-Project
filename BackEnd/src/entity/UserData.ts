@@ -1,9 +1,7 @@
 import { Date, model, Schema } from "mongoose";
 
 export interface UserData {
-  firstName?: string;
-  middleName?: string;
-  lastName?: string;
+  Name?: string;
   address1?: string;
   address2?: string;
   phoneNum1?: string;
@@ -12,10 +10,8 @@ export interface UserData {
   occupation?: string;
 }
 
-const UserDataSchema = new Schema<UserData>({
-  firstName: { type: String },
-  middleName: { type: String },
-  lastName: { type: String },
+export const UserDataSchema = new Schema<UserData>({
+  Name: { type: String },
   address1: { type: String },
   address2: { type: String },
   phoneNum1: { type: String },

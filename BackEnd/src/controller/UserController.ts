@@ -1,8 +1,13 @@
+import { FormDataModel } from "../entity/Forms/FormData";
+import { createAccessToken, createRefreshToken } from "./../utils";
 import { ResType } from "./../types";
 import { Schema } from "mongoose";
 import { User, UserModel } from "./../entity/User";
 import { Request, Response } from "express";
 import QueryString from "qs";
+import { sendRefreshToken } from "../utils";
+import argon2 from "argon2";
+import { UserParentDataModel } from "../entity/UserParentData";
 
 interface CParams {
   id: string;
@@ -29,6 +34,13 @@ export const addUser = async (req: Request, res: Response) => {
   let user: User = req.body.user;
   let returnedResponse: ResType;
 
+  if (user.email === "" || user.password === "") {
+    returnedResponse = generateResponse("User or Password maybe wrong", null);
+    return res.status(500).json(returnedResponse);
+  }
+
+  user.password = await argon2.hash(user.password);
+
   try {
     let checkUser = await UserModel.findOne({ email: user.email });
 
@@ -44,6 +56,13 @@ export const addUser = async (req: Request, res: Response) => {
     );
     return res.status(500).json(returnedResponse);
   }
+  let cparentData = new UserParentDataModel();
+  cparentData = await cparentData.save();
+  user.parentData = cparentData._id as any;
+
+  let formData = new FormDataModel();
+  formData = await formData.save();
+  user.formData = formData._id as any;
 
   let newUser = new UserModel(user);
 
@@ -55,7 +74,7 @@ export const addUser = async (req: Request, res: Response) => {
   } catch (e) {
     console.log(e);
     returnedResponse = generateResponse(
-      "Internal Server Error failt to save user while creation",
+      "Internal Server Error failed to save user while creation",
       null
     );
     return res.status(500).json(returnedResponse);
@@ -95,21 +114,27 @@ export const userLogIn = async (req: Request, res: Response) => {
 
   try {
     let dbUser = await UserModel.findOne({ email: user.email });
-
-    if (dbUser !== null) {
+    console.log(dbUser);
+    if (dbUser === null) {
       returnedResponse = generateResponse("User does not exists", null);
-      return res.status(404).json(returnedResponse);
+      return res.status(400).json(returnedResponse);
     }
 
-    if (dbUser.password !== user.password) {
+    let passChek = await argon2.verify(dbUser.password, user.password);
+    if (!passChek) {
       returnedResponse = generateResponse(
         "email or password maybe incorrect",
         null
       );
       return res.status(400).json(returnedResponse);
     }
-    returnedResponse = generateResponse(null, dbUser);
+    returnedResponse = generateResponse(null, {
+      dbUser,
+      token: createAccessToken(dbUser.id),
+    });
+    sendRefreshToken(res, createRefreshToken(dbUser.id));
     return res.status(200).json(returnedResponse);
+    // .send({ token: createAccessToken(dbUser.id) });
   } catch (e) {
     console.log(e);
     returnedResponse = generateResponse("Faild to find user", null);
@@ -158,3 +183,26 @@ export const updateUser = async (req: Request, res: Response) => {
 };
 
 /////?
+
+export const findUser = async (userInfo: string): Promise<User | null> => {
+  let inputType = "";
+  if (userInfo.includes("@")) {
+    inputType = "email";
+  } else {
+    inputType = "id";
+  }
+  let user = null;
+  try {
+    if (inputType === "email") {
+      user = await UserModel.find({ email: userInfo });
+    } else {
+      user = await UserModel.findById(userInfo);
+    }
+    if (user && user.length === 0) {
+      user = null;
+    }
+  } catch (e) {
+    throw e;
+  }
+  return user;
+};

@@ -1,4 +1,4 @@
-import { UserData, UserDataModel } from "./UserData";
+import { UserData, UserDataModel, UserDataSchema } from "./UserData";
 import { Date, model, Schema } from "mongoose";
 
 export interface UserParentData {
@@ -8,9 +8,9 @@ export interface UserParentData {
 }
 
 const UserParentDataSchema = new Schema<UserParentData>({
-  motherData: { type: UserDataModel },
-  fatherData: { type: UserDataModel },
-  gardianData: { type: UserDataModel },
+  motherData: { type: UserDataSchema },
+  fatherData: { type: UserDataSchema },
+  gardianData: { type: UserDataSchema },
 });
 
 export const UserParentDataModel = model<UserParentData>(
