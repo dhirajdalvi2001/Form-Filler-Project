@@ -1,6 +1,6 @@
 import { FaGithubSquare } from "react-icons/fa";
 import GlobalStyles from "./styles/Global";
-import { Container, StldFooter } from "./styles/Footer";
+import { Container, StldFooter, NavLink, Anchor } from "./styles/Footer";
 
 function Footer() {
   return (
@@ -8,10 +8,10 @@ function Footer() {
       <StldFooter>
         <Container>
           <h3>Form Filler</h3>
-          <h5>Home</h5>
-          <h5>About</h5>
-          <h5>Forms</h5>
-          <h5>Login</h5>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/about">About</NavLink>
+          <NavLink to="/forms">Forms</NavLink>
+          <NavLink to="/login">Login</NavLink>
         </Container>
         <Container>
           <h3>Members</h3>
@@ -22,27 +22,27 @@ function Footer() {
         </Container>
         <Container>
           <h3>Socials</h3>
-          <h5>
+          <a href="https://github.com/feAr81001" target="_blank">
             <FaGithubSquare />
             &nbsp; /Saurabh
-          </h5>
-          <h5>
+          </a>
+          <a href="https://github.com/pariks90900" target="_blank">
             <FaGithubSquare />
             &nbsp; /Parikshit
-          </h5>
-          <h5>
+          </a>
+          <a href="https://github.com/dhirajdalvi2001" target="_blank">
             <FaGithubSquare />
             &nbsp; /Dhiraj
-          </h5>
-          <h5>
+          </a>
+          <a href="">
             <FaGithubSquare />
             &nbsp; /Amaan
-          </h5>
+          </a>
         </Container>
         <Container>
           <h3>Account</h3>
-          <h5>Register</h5>
-          <h5>Login</h5>
+          <NavLink to="/sign-up">Register</NavLink>
+          <NavLink to="/login">Login</NavLink>
         </Container>
       </StldFooter>
     </>

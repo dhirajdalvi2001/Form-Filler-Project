@@ -46,7 +46,7 @@ align-items: center;
 
 export const ContentBox = styled.div`
 width: 100%;
-min-height: fit-content%;
+min-height: fit-content;
 height: 2150px;
 max-height: max-content;
 display: flex;
@@ -57,6 +57,7 @@ display: flex;
 
 @media screen and (max-width: 600px) {
     flex-direction: column-reverse;
+    justify-content: flex-end;
 }
 `
 
@@ -167,6 +168,7 @@ background-color: rgba(0, 0, 0, 0.1);
 
 @media screen and (max-width: 600px) {
     width: 100%;
+    height: auto;
 }
 `
 
