@@ -1,10 +1,5 @@
-import {
-  CollegeFormData,
-  CollegeFormDataModel,
-  CollegeFormDataSchema,
-} from "./CollegeFormData";
+import { CollegeFormData, CollegeFormDataSchema } from "./CollegeFormData";
 import { Schema, model, Types } from "mongoose";
-import { Int32 } from "mongodb";
 export interface FormData {
   form?: string;
   collegeFormData?: CollegeFormData;

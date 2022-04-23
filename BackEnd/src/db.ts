@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
-const mongoConnect = async () => {
+export const mongoConnect = async () => {
   let dbUri = process.env.DB_URI;
   mongoose
     .connect(dbUri)
-    .then(() => console.log("Connected"))
+    .then(() => console.log("Connected to db"))
     .catch((e) => console.log(`Error Occured:\n${e}`));
 };

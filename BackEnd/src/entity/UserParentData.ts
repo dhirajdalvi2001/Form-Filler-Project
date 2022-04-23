@@ -1,4 +1,4 @@
-import { UserData, UserDataModel, UserDataSchema } from "./UserData";
+import { UserData, UserDataSchema } from "./UserData";
 import { Date, model, Schema } from "mongoose";
 
 export interface UserParentData {

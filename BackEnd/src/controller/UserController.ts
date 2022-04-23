@@ -1,37 +1,69 @@
+import { UserData } from "../entity/UserData";
+import { findUser } from "./UserUtils";
 import { FormDataModel } from "../entity/Forms/FormData";
-import { createAccessToken, createRefreshToken } from "./../utils";
-import { ResType } from "./../types";
-import { Schema } from "mongoose";
-import { User, UserModel } from "./../entity/User";
+import {
+  createAccessToken,
+  createRefreshToken,
+  verifyAccessToken,
+  generateResponse,
+} from "../utils";
+import { ResType } from "../types";
+import { User, UserModel, UserAllData } from "../entity/User";
 import { Request, Response } from "express";
-import QueryString from "qs";
 import { sendRefreshToken } from "../utils";
 import argon2 from "argon2";
 import { UserParentDataModel } from "../entity/UserParentData";
+import express from "express";
 
-interface CParams {
-  id: string;
-}
+const UserRouter = express.Router();
 
-type CReq = Request<
-  {} & CParams,
-  any,
-  any,
-  QueryString.ParsedQs,
-  Record<string, any>
->;
+const checkToken = (req: Request): Boolean => {
+  if (!req.body.token) {
+    return false;
+  }
 
-type CRes = Response<any, Record<string, any>>;
-
-const generateResponse = (err: string, data: any): ResType => {
-  return {
-    error: err,
-    data,
-  };
+  if (!verifyAccessToken(req.body.token)) {
+    return false;
+  }
+  return true;
 };
 
-//------------------------------------------------------
-export const addUser = async (req: Request, res: Response) => {
+UserRouter.post("/login", async (req: Request, res: Response) => {
+  let user: User = req.body.user;
+  let returnedResponse: ResType;
+
+  try {
+    let dbUser = await UserModel.findOne({ email: user.email });
+    // console.log(dbUser);
+    if (dbUser === null) {
+      returnedResponse = generateResponse("User does not exists", null);
+      return res.status(400).json(returnedResponse);
+    }
+
+    let passChek = await argon2.verify(dbUser.password, user.password);
+    if (!passChek) {
+      returnedResponse = generateResponse(
+        "email or password maybe incorrect",
+        null
+      );
+      return res.status(400).json(returnedResponse);
+    }
+    dbUser.password = "";
+    returnedResponse = generateResponse(null, {
+      dbUser,
+      token: createAccessToken(dbUser.id),
+    });
+    sendRefreshToken(res, createRefreshToken(dbUser.id));
+    return res.status(200).json(returnedResponse);
+    // .send({ token: createAccessToken(dbUser.id) });
+  } catch (e) {
+    console.log(e);
+    returnedResponse = generateResponse("Faild to find user", null);
+    return res.status(500).json(returnedResponse);
+  }
+});
+
+UserRouter.post("/add", async (req: Request, res: Response) => {
   let user: User = req.body.user;
   let returnedResponse: ResType;
 
@@ -52,7 +84,7 @@ export const addUser = async (req: Request, res: Response) => {
   } catch (e) {
     console.log(e);
     returnedResponse = generateResponse(
-      "Server Error Faild to find User while User creation ",
+      "Server Error Faild User creation ",
       null
     );
     return res.status(500).json(returnedResponse);
@@ -70,6 +102,7 @@ export const addUser = async (req: Request, res: Response) => {
   try {
     let savedUser = await newUser.save();
     // console.log(savedUser);
+    savedUser.password = "";
     returnedResponse = generateResponse(null, savedUser);
     return res.status(201).json(returnedResponse);
   } catch (e) {
@@ -80,19 +113,20 @@ export const addUser = async (req: Request, res: Response) => {
     );
     return res.status(500).json(returnedResponse);
   }
-};
+});
 
-//---------------------------------------
-export const deleteUser = async (req: Request, res: Response) => {
-  let userId = req.body.id;
-  // console.log(req.body);
+UserRouter.delete("/delete", async (req: Request, res: Response) => {
   let returnedResponse: ResType;
-  // console.log(userId);
 
-  if (!userId) {
-    returnedResponse = generateResponse("Id Not Provided for deletion", null);
-    return res.status(406).json(returnedResponse);
+  if (!checkToken(req)) {
+    returnedResponse = generateResponse(
+      "Token wrong or does not exists",
+      false
+    );
+    return res.status(200).json(returnedResponse);
   }
+
+  let { userId }: any = verifyAccessToken(req.body.token);
 
   try {
     let result = await UserModel.deleteOne({ _id: userId });
@@ -108,67 +142,81 @@ export const deleteUser = async (req: Request, res: Response) => {
     returnedResponse = generateResponse("Error While Deletion", null);
     return res.status(500).json(returnedResponse);
   }
-};
-
-export const userLogIn = async (req: Request, res: Response) => {
-  let user: User = req.body.user;
+});
+//--------------------
+UserRouter.put("/update", async (req: Request, res: Response) => {
   let returnedResponse: ResType;
 
-  try {
-    let dbUser = await UserModel.findOne({ email: user.email });
-    // console.log(dbUser);
-    if (dbUser === null) {
-      returnedResponse = generateResponse("User does not exists", null);
-      return res.status(400).json(returnedResponse);
-    }
-
-    let passChek = await argon2.verify(dbUser.password, user.password);
-    if (!passChek) {
-      returnedResponse = generateResponse(
-        "email or password maybe incorrect",
-        null
-      );
-      return res.status(400).json(returnedResponse);
-    }
-    returnedResponse = generateResponse(null, {
-      dbUser,
-      token: createAccessToken(dbUser.id),
-    });
-    sendRefreshToken(res, createRefreshToken(dbUser.id));
-    return res.status(200).json(returnedResponse);
-    // .send({ token: createAccessToken(dbUser.id) });
-  } catch (e) {
-    console.log(e);
-    returnedResponse = generateResponse("Faild to find user", null);
-    return res.status(500).json(returnedResponse);
+  if (!checkToken(req)) {
+    return res.status(406).json(generateResponse("invalid token", null));
   }
-};
+  let userData: UserData = req.body.userData;
 
-//----------------------
-export const updateUser = async (req: Request, res: Response) => {
-  let reqUser = req.body.user;
+  let { userId }: any = verifyAccessToken(req.body.token);
 
-  let newUser = {
-    password: reqUser.password,
-  };
-  let userId = req.body.id;
-  let returnedResponse: ResType;
+  let user = await UserModel.findById(userId);
 
-  if (!userId) {
-    returnedResponse = generateResponse("Id Not Provided for deletion", null);
-    return res.status(406).json(returnedResponse);
+  if (!user) {
+    returnedResponse = generateResponse("User not found", null);
+    return res.status(404).json(returnedResponse);
   }
 
   try {
     let updateUser = await UserModel.findOneAndUpdate(
       { _id: userId },
-      newUser,
+      { userData },
       {
         upsert: true,
       }
     );
 
     if (updateUser) {
+      updateUser.password = "";
+      returnedResponse = generateResponse(null, updateUser);
+      return res.status(200).json(returnedResponse);
+      // console.log(s);
+    }
+  } catch (e) {
+    console.log(e);
+    returnedResponse = generateResponse("Error while updating", null);
+    return res.status(406).json(returnedResponse);
+  }
+});
+//--------------------
+
+UserRouter.put("/changepass", async (req: Request, res: Response) => {
+  let returnedResponse: ResType;
+
+  if (!checkToken(req)) {
+    return res.status(406).json(generateResponse("invalid token", null));
+  }
+  let oldPass = req.body.oldpass;
+  let newPass = req.body.newpass;
+
+  let { userId }: any = verifyAccessToken(req.body.token);
+
+  let user = await UserModel.findById(userId);
+
+  let passCheck = await argon2.verify(user.password, oldPass);
+
+  if (!passCheck) {
+    return res
+      .status(400)
+      .json(generateResponse("password do not match", null));
+  }
+
+  try {
+    newPass = await argon2.hash(newPass);
+    let updateUser = await UserModel.findOneAndUpdate(
+      { _id: userId },
+      { password: newPass },
+      {
+        upsert: true,
+      }
+    );
+
+    if (updateUser) {
+      updateUser.password = "";
       returnedResponse = generateResponse(null, updateUser);
       return res.status(200).json(returnedResponse);
       // console.log(s);
@@ -180,27 +228,48 @@ export const updateUser = async (req: Request, res: Response) => {
     returnedResponse = generateResponse("Error while updating", null);
     return res.status(406).json(returnedResponse);
   }
-};
+});
 
-/////?
-
-export const findUser = async (
-  userInfo: string,
-  inputType: String = "id"
-): Promise<(User & { _id: string }) | null> => {
-  let user = null;
-  try {
-    if (inputType === "email") {
-      user = await UserModel.find({ email: userInfo });
-    } else if (inputType === "id") {
-      user = await UserModel.findById(userInfo);
-    }
-
-    if (user && user.length === 0) {
-      user = null;
-    }
-  } catch (e) {
-    throw e;
+UserRouter.get("/get", async (req: Request, res: Response) => {
+  if (!checkToken(req)) {
+    return res.json(generateResponse("Token invalid", null));
   }
-  return user;
-};
+  let token = req.body.token;
+  let { userId }: any = verifyAccessToken(token);
+
+  let user = await findUser(userId);
+
+  if (user === null) {
+    return res.json(generateResponse("User does not exists", null));
+  }
+
+  user.password = "";
+  return res.json(generateResponse(null, user));
+});
+
+UserRouter.get("/getalldata", async (req: Request, res: Response) => {
+  if (!checkToken(req)) {
+    return res.json(generateResponse("Token invalid", null));
+  }
+  let token = req.body.token;
+  let { userId }: any = verifyAccessToken(token);
+  let user: UserAllData = { id: "", email: "" };
+
+  let dbUser = await findUser(userId);
+  if (user === null) {
+    return res.json(generateResponse("User does not exists", null));
+  }
+  // console.log(dbUser);
+
+  let parentData = await UserParentDataModel.findById(dbUser.parentData);
+  let formData = await FormDataModel.findById(dbUser.formData);
+  user.id = dbUser._id;
+  user.email = dbUser.email;
+  user.userData = dbUser.userData;
+  user.parentData = parentData;
+  user.formData = formData;
+
+  return res.json(generateResponse(null, user));
+});
+
+export default UserRouter;

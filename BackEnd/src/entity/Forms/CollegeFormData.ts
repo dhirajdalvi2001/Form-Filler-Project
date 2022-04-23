@@ -1,5 +1,4 @@
 import { Schema, model, Types } from "mongoose";
-import { Int32 } from "mongodb";
 
 export interface AcadmicRecordData {
   year: String;

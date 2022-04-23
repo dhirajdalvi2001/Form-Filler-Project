@@ -1,6 +1,6 @@
-import { User } from "./entity/User";
 import { verify, sign } from "jsonwebtoken";
 import { Response } from "express";
+import { ResType } from "./types";
 
 export const PORJECT_ROOT = __dirname;
 
@@ -38,4 +38,11 @@ export const verifyRefreshToken = (tok: string) => {
   } catch (e) {
     return false;
   }
+};
+
+export const generateResponse = (err: string, data: any): ResType => {
+  return {
+    error: err,
+    data,
+  };
 };
