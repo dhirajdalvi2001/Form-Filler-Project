@@ -9,7 +9,7 @@ body {
     width: 100%;
     height: max-content;
     background-color: rgba(0, 0, 0, 0.2);
-    background-image: url("https://www.transparenttextures.com/patterns/broken-noise.png");
+    /* background-image: url("https://www.transparenttextures.com/patterns/broken-noise.png"); */
 }
 
 li {
