@@ -40,7 +40,9 @@ const PORT = process.env.PORT || 3000;
 import { UserModel } from "./entity/User";
 import { connect } from "mongoose";
 import { resolve } from "url";
-import FormRouter from "./controller/FormController";
+import CollegeDataFormRouter from "./controller/Forms/CollegeDataFormController";
+import UserRouter from "./controller/User_Controller";
+import FormRouter from "./controller/Forms";
 
 (async () => {
   let con = await connect("mongodb://127.0.0.1:5000/newtest");
@@ -54,7 +56,6 @@ import FormRouter from "./controller/FormController";
 
   /* temp scafold */
   app.get("/", async (req, res) => {
-    console.log(req.ip);
     let users = await UserModel.find({});
     let rees = users; //JSON.stringify(users);
     let styling = `<css>body{ background-color:black; color:white }</css> `;
@@ -72,9 +73,10 @@ import FormRouter from "./controller/FormController";
   app.post("/login", userLogIn);
 
   app.use("/form", FormRouter);
+  app.use("/user", UserRouter);
 
   app.post("/form/data", (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
 
     res.send(`${JSON.stringify(req.body)} Done`);
   });
@@ -138,10 +140,10 @@ import FormRouter from "./controller/FormController";
     res.send(result);
   });
 
-  app.get("/form/regform", (req, res) => {
-    console.log(__dirname);
-    res.sendFile("RegForm.pdf", { root: __dirname });
-  });
+  // app.get("/form/regform", (req, res) => {
+  //   console.log(__dirname);
+  //   res.sendFile("RegForm.pdf", { root: __dirname });
+  // });
   app.listen(PORT, () => {
     console.log(`app running on http://127.0.0.1:${PORT}`);
   });

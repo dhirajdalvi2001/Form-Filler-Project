@@ -1,6 +1,16 @@
+import { FormData } from "./Forms/FormData";
+import { UserParentData } from "./UserParentData";
 import { Schema, model } from "mongoose";
 import { Int32 } from "mongodb";
 import { UserData, UserDataSchema } from "./UserData";
+
+export interface UserAllData {
+  id: string;
+  email: string;
+  userData?: UserData;
+  parentData?: UserParentData;
+  formData?: FormData;
+}
 export interface User {
   email: string;
   password: string;

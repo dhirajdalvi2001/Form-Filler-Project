@@ -2,6 +2,8 @@ import { User } from "./entity/User";
 import { verify, sign } from "jsonwebtoken";
 import { Response } from "express";
 
+export const PORJECT_ROOT = __dirname;
+
 export const createAccessToken = (id: string): string => {
   return sign({ userId: id }, process.env.ACCESS_TOKEN_SECRET!, {
     expiresIn: "15m",

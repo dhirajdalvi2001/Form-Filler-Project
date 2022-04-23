@@ -1,17 +1,22 @@
-import { verifyAccessToken } from "./../utils";
+import { UserAllData } from "./../../entity/User";
+import { verifyAccessToken, PORJECT_ROOT } from "../../utils";
 import {
   CollegeFormData,
   CollegeFormDataModel,
-} from "./../entity/Forms/CollegeFormData";
-import { FormData, FormDataModel } from "./../entity/Forms/FormData";
-import { UserData, UserDataModel } from "./../entity/UserData";
+} from "../../entity/Forms/CollegeFormData";
+import { FormData, FormDataModel } from "../../entity/Forms/FormData";
+import { UserData, UserDataModel } from "../../entity/UserData";
 import express from "express";
-import { verifyRefreshToken } from "../utils";
-import { findUser } from "./UserController";
+import { verifyRefreshToken } from "../../utils";
+import { findUser } from "../UserController";
 
-let FormRouter = express.Router();
+let CollegeDataFormRouter = express.Router();
 
-FormRouter.use(async (req, res, next) => {
+CollegeDataFormRouter.get("/collegeform", (req, res) => {
+  res.sendFile("CollegeRegForm.pdf", { root: PORJECT_ROOT });
+});
+
+CollegeDataFormRouter.use(async (req, res, next) => {
   let cookie = req.body.token;
 
   if (cookie === undefined) {
@@ -24,24 +29,28 @@ FormRouter.use(async (req, res, next) => {
   next();
 });
 
-FormRouter.get("/collegeformdata", async (req, res) => {
+CollegeDataFormRouter.get("/collegeformdata", async (req, res) => {
   try {
     let { userId }: any = verifyAccessToken(req.body.token);
     let user = await findUser(userId);
-
+    let userDataToSend: UserAllData;
     if (user.formData == null) {
-      return res.send();
+      return res.send("Error: user does not exists");
     }
+
+    let formData = await FormDataModel.findById(user.formData);
+
+    return res.json(formData);
   } catch (e) {
     // console.log(e);
     return res.send("Error: Something wrong happened");
   }
 });
 
-FormRouter.post("/collegeformdata", async (req, res) => {
+CollegeDataFormRouter.post("/collegeformdata", async (req, res) => {
   let collegeFormData: CollegeFormData = req.body.collegeFormData;
   let { userId }: any = verifyAccessToken(req.body.token);
-  console.log(collegeFormData);
+  // console.log(collegeFormData);
   try {
     let user = await findUser(userId);
 
@@ -63,4 +72,4 @@ FormRouter.post("/collegeformdata", async (req, res) => {
   }
 });
 
-export default FormRouter;
+export default CollegeDataFormRouter;

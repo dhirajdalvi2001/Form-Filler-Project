@@ -30,6 +30,7 @@ const generateResponse = (err: string, data: any): ResType => {
   };
 };
 
+//------------------------------------------------------
 export const addUser = async (req: Request, res: Response) => {
   let user: User = req.body.user;
   let returnedResponse: ResType;
@@ -81,9 +82,10 @@ export const addUser = async (req: Request, res: Response) => {
   }
 };
 
+//---------------------------------------
 export const deleteUser = async (req: Request, res: Response) => {
   let userId = req.body.id;
-  console.log(req.body);
+  // console.log(req.body);
   let returnedResponse: ResType;
   // console.log(userId);
 
@@ -114,7 +116,7 @@ export const userLogIn = async (req: Request, res: Response) => {
 
   try {
     let dbUser = await UserModel.findOne({ email: user.email });
-    console.log(dbUser);
+    // console.log(dbUser);
     if (dbUser === null) {
       returnedResponse = generateResponse("User does not exists", null);
       return res.status(400).json(returnedResponse);
@@ -142,12 +144,10 @@ export const userLogIn = async (req: Request, res: Response) => {
   }
 };
 
+//----------------------
 export const updateUser = async (req: Request, res: Response) => {
-  console.log(req.body);
   let reqUser = req.body.user;
-  console.log("here");
-  console.log(reqUser);
-  console.log("done");
+
   let newUser = {
     password: reqUser.password,
   };
@@ -184,20 +184,18 @@ export const updateUser = async (req: Request, res: Response) => {
 
 /////?
 
-export const findUser = async (userInfo: string): Promise<User | null> => {
-  let inputType = "";
-  if (userInfo.includes("@")) {
-    inputType = "email";
-  } else {
-    inputType = "id";
-  }
+export const findUser = async (
+  userInfo: string,
+  inputType: String = "id"
+): Promise<(User & { _id: string }) | null> => {
   let user = null;
   try {
     if (inputType === "email") {
       user = await UserModel.find({ email: userInfo });
-    } else {
+    } else if (inputType === "id") {
       user = await UserModel.findById(userInfo);
     }
+
     if (user && user.length === 0) {
       user = null;
     }

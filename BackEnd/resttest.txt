@@ -1,0 +1,27 @@
+{
+    "user": {
+        "email":"some1@gmail.com",
+        "password": "SomeSuperPassword"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjYzYzVlMWY5NzdlZTUzNWE2OGNjZDUiLCJpYXQiOjE2NTA3MTUzNTAsImV4cCI6MTY1MDcxNjI1MH0.ke9gnaOEOGsPDjzoRa-PFRc7mHCSXXQuSpGOxzID-Gs",
+    "collegeFormData": {
+        "opEmail":"some1Updates@OpEmail.com",
+        "secondryExam": {
+            "year": "2021",
+            "CollegeName": "Some College",
+            "University": "Some Uni",
+            "DivisionOrPercent": "7.0"
+        }
+    },
+    "parentData": {
+        "motherData": {
+            "Name": "some name ..."
+        },
+        "fatherData": {
+            "Name":"some father name"
+        }
+    },
+    "userData": {
+        "Name": "some user name"
+    }
+}
