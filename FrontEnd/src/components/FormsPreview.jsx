@@ -13,8 +13,8 @@ function FormsPreview({formDataToSend}) {
     if (windowsWidth > 1000) {
       setWinScale(1)
     }
-    if (windowsWidth <700) {
-      setWinScale(0.6)
+    if (windowsWidth <= 700) {
+      setWinScale(0.5)
     }
   });
   //states
@@ -568,8 +568,9 @@ function FormsPreview({formDataToSend}) {
               <BiLastPage onClick={() => { setPageNum(2) }} />
             </ChangePage>
           </PDFMenu>
+          
           {winScale === 1 && <PDFReader data={arrayBuf} page={pageNum} scale={1} /> }
-          {winScale === 0.6 && <PDFReader data={arrayBuf} page={pageNum} scale={0.6} /> }
+          {winScale === 0.5 && <PDFReader data={arrayBuf} page={pageNum} scale={0.5} /> }
           
           <PDFMenu className="bottom">
             <ChangePage>
