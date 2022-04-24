@@ -18,7 +18,11 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "http://127.0.0.1:3000",
+    // origin: "*",
+    credentials: true,
+    // allowedHeaders: ["Content-Type", "Authorization", "x-csrf-token"],
+    // exposedHeaders: ["*", "Authorization"],
   })
 );
 
@@ -30,7 +34,6 @@ import UserRouter from "./controller/UserController";
 import FormRouter from "./controller/Forms";
 
 (async () => {
-  // let con = await connect("mongodb://127.0.0.1:5000/newtest");
   await mongoConnect();
   app.use(express.json());
   app.use(cookieParser());
@@ -40,30 +43,28 @@ import FormRouter from "./controller/Forms";
 
   app.get("/refresh_token", (req, res) => {
     if (req.cookies.jid) {
+      // console.log(req.cookies.jid);
       let tok: any = verifyRefreshToken(req.cookies.jid);
       if (!tok) {
-        res.send({ token: null });
-        return;
+        return res.json({ token: "" });
       } else {
         let id = tok.userId;
 
         try {
           let user = UserModel.findById(id);
           if (!user) {
-            res.send({ token: null });
+            res.send({ token: "" });
           }
         } catch (e) {
-          res.send({ token: null });
-          return;
+          return res.json({ token: "" });
         }
         let refreshTok = createRefreshToken(id);
         let accessTok = createAccessToken(id);
         sendRefreshToken(res, refreshTok);
-        res.send({ token: accessTok });
-        return;
+        return res.json({ token: accessTok });
       }
     }
-    res.send("Not allowed");
+    res.json({ token: "" });
   });
 
   app.listen(PORT, () => {

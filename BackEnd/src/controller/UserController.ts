@@ -57,7 +57,7 @@ UserRouter.post("/login", async (req: Request, res: Response) => {
     return res.status(200).json(returnedResponse);
     // .send({ token: createAccessToken(dbUser.id) });
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     returnedResponse = generateResponse("Faild to find user", null);
     return res.status(500).json(returnedResponse);
   }
@@ -82,7 +82,7 @@ UserRouter.post("/add", async (req: Request, res: Response) => {
       return res.status(406).json(returnedResponse);
     }
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     returnedResponse = generateResponse(
       "Server Error Faild User creation ",
       null
@@ -106,7 +106,7 @@ UserRouter.post("/add", async (req: Request, res: Response) => {
     returnedResponse = generateResponse(null, savedUser);
     return res.status(201).json(returnedResponse);
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     returnedResponse = generateResponse(
       "Internal Server Error failed to save user while creation",
       null
@@ -132,13 +132,17 @@ UserRouter.delete("/delete", async (req: Request, res: Response) => {
     let result = await UserModel.deleteOne({ _id: userId });
     // console.log(result);
     if (result.deletedCount === 1) {
-      returnedResponse = generateResponse(null, true);
+      returnedResponse = generateResponse(null, { done: true, token: "" });
     } else {
-      returnedResponse = generateResponse("User does not exists", false);
+      returnedResponse = generateResponse("User does not exists", {
+        done: false,
+        token: "",
+      });
     }
+    sendRefreshToken(res, "");
     return res.status(200).json(returnedResponse);
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     returnedResponse = generateResponse("Error While Deletion", null);
     return res.status(500).json(returnedResponse);
   }
@@ -146,7 +150,7 @@ UserRouter.delete("/delete", async (req: Request, res: Response) => {
 //--------------------
 UserRouter.put("/update", async (req: Request, res: Response) => {
   let returnedResponse: ResType;
-
+  // console.log(res.cookie);
   if (!checkToken(req)) {
     return res.status(406).json(generateResponse("invalid token", null));
   }
@@ -177,7 +181,7 @@ UserRouter.put("/update", async (req: Request, res: Response) => {
       // console.log(s);
     }
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     returnedResponse = generateResponse("Error while updating", null);
     return res.status(406).json(returnedResponse);
   }
@@ -224,13 +228,13 @@ UserRouter.put("/changepass", async (req: Request, res: Response) => {
     returnedResponse = generateResponse("User not found", null);
     return res.status(404).json(returnedResponse);
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     returnedResponse = generateResponse("Error while updating", null);
     return res.status(406).json(returnedResponse);
   }
 });
 
-UserRouter.get("/get", async (req: Request, res: Response) => {
+UserRouter.post("/get", async (req: Request, res: Response) => {
   if (!checkToken(req)) {
     return res.json(generateResponse("Token invalid", null));
   }
@@ -247,7 +251,7 @@ UserRouter.get("/get", async (req: Request, res: Response) => {
   return res.json(generateResponse(null, user));
 });
 
-UserRouter.get("/getalldata", async (req: Request, res: Response) => {
+UserRouter.post("/getalldata", async (req: Request, res: Response) => {
   if (!checkToken(req)) {
     return res.json(generateResponse("Token invalid", null));
   }
@@ -270,6 +274,11 @@ UserRouter.get("/getalldata", async (req: Request, res: Response) => {
   user.formData = formData;
 
   return res.json(generateResponse(null, user));
+});
+
+UserRouter.get("/logout", async (req: Request, res: Response) => {
+  sendRefreshToken(res, "");
+  return res.json(generateResponse(null, { done: true }));
 });
 
 export default UserRouter;

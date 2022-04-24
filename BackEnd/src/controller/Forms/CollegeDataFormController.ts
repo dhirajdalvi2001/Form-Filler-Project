@@ -23,7 +23,7 @@ CollegeDataFormRouter.use(async (req, res, next) => {
   next();
 });
 
-CollegeDataFormRouter.get("/collegeformdata", async (req, res) => {
+CollegeDataFormRouter.post("/collegeformdata", async (req, res) => {
   try {
     let { userId }: any = verifyAccessToken(req.body.token);
     let user = await findUser(userId);
@@ -40,7 +40,7 @@ CollegeDataFormRouter.get("/collegeformdata", async (req, res) => {
   }
 });
 
-CollegeDataFormRouter.post("/collegeformdata", async (req, res) => {
+CollegeDataFormRouter.put("/collegeformdata", async (req, res) => {
   let collegeFormData: CollegeFormData = req.body.collegeFormData;
   let { userId }: any = verifyAccessToken(req.body.token);
   // console.log(collegeFormData);
