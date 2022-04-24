@@ -132,10 +132,14 @@ UserRouter.delete("/delete", async (req: Request, res: Response) => {
     let result = await UserModel.deleteOne({ _id: userId });
     // console.log(result);
     if (result.deletedCount === 1) {
-      returnedResponse = generateResponse(null, true);
+      returnedResponse = generateResponse(null, { done: true, token: "" });
     } else {
-      returnedResponse = generateResponse("User does not exists", false);
+      returnedResponse = generateResponse("User does not exists", {
+        done: false,
+        token: "",
+      });
     }
+    sendRefreshToken(res, "");
     return res.status(200).json(returnedResponse);
   } catch (e) {
     console.log(e);
@@ -146,7 +150,7 @@ UserRouter.delete("/delete", async (req: Request, res: Response) => {
 //--------------------
 UserRouter.put("/update", async (req: Request, res: Response) => {
   let returnedResponse: ResType;
-
+  // console.log(res.cookie);
   if (!checkToken(req)) {
     return res.status(406).json(generateResponse("invalid token", null));
   }
@@ -230,7 +234,7 @@ UserRouter.put("/changepass", async (req: Request, res: Response) => {
   }
 });
 
-UserRouter.get("/get", async (req: Request, res: Response) => {
+UserRouter.post("/get", async (req: Request, res: Response) => {
   if (!checkToken(req)) {
     return res.json(generateResponse("Token invalid", null));
   }
@@ -247,7 +251,7 @@ UserRouter.get("/get", async (req: Request, res: Response) => {
   return res.json(generateResponse(null, user));
 });
 
-UserRouter.get("/getalldata", async (req: Request, res: Response) => {
+UserRouter.post("/getalldata", async (req: Request, res: Response) => {
   if (!checkToken(req)) {
     return res.json(generateResponse("Token invalid", null));
   }
@@ -270,6 +274,11 @@ UserRouter.get("/getalldata", async (req: Request, res: Response) => {
   user.formData = formData;
 
   return res.json(generateResponse(null, user));
+});
+
+UserRouter.get("/logout", async (req: Request, res: Response) => {
+  sendRefreshToken(res, "");
+  return res.json(generateResponse(null, { done: true }));
 });
 
 export default UserRouter;

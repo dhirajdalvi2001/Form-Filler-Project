@@ -24,8 +24,8 @@ const UseForm = (callback, validate) => {
     const data = new FormData(e.target);
     // console.log(Object.fromEntries(data.entries()));
   };
-  
-  useEffect(() => {
+
+  useEffect(async () => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
       callback();
     }

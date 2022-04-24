@@ -1,22 +1,29 @@
 import { StldBody } from "./styles/Global";
-import { MainContainer, PrimaryContainer, Heading1, InputField, FormField, ContentBox } from "./styles/Forms";
+import {
+  MainContainer,
+  PrimaryContainer,
+  Heading1,
+  InputField,
+  FormField,
+  ContentBox,
+} from "./styles/Forms";
 import FormsInput from "./FormsInput";
 import FormsPreview from "./FormsPreview";
 import { createContext, useState } from "react";
 import { useEffect } from "react";
 import { ListOfForms } from "./arrays/ListOfForms";
-import Card from "./Card"
+import Card from "./Card";
 
 export const FormContext = createContext();
 export const ShouldPDFContext = createContext();
 export const UploadDataContext = createContext();
 
 function Forms() {
-  const [PDFUpdate, setPDFUpdate] = useState(false)
+  const [PDFUpdate, setPDFUpdate] = useState(false);
   const [formData, setFormData] = useState({
     studentName: "",
     fathersName: "",
-    studentlastName: "",
+    // studentlastName: "",
     studentNumber: "",
     studentDOB: "",
     studentPOB: "",
@@ -52,11 +59,11 @@ function Forms() {
     graduationCollegeNameAndPlace: "",
     graduationUniversityOrBoard: "",
     graduationDivisionAndPercentage: "",
-  })
+  });
   const [formDataToSend, setFormDataToSend] = useState({
     studentName: "",
     fathersName: "",
-    studentlastName: "",
+    // studentlastName: "",
     studentNumber: "",
     studentDOB: "",
     studentPOB: "",
@@ -92,11 +99,11 @@ function Forms() {
     graduationCollegeNameAndPlace: "",
     graduationUniversityOrBoard: "",
     graduationDivisionAndPercentage: "",
-  })
+  });
 
   useEffect(async () => {
     if (PDFUpdate) {
-      let UploadData = {}
+      let UploadData = {};
       for (let key in formData) {
         if (formData[key] !== "") {
           UploadData[key] = formData[key];
@@ -104,7 +111,7 @@ function Forms() {
       }
       // await postData("http://localhost:4000/", UploadData)
     }
-  }, [PDFUpdate])
+  }, [PDFUpdate]);
 
   // async function postData(url = "http://localhost:4000/", data = {}) {
   //   // Default options are marked with *
@@ -122,21 +129,22 @@ function Forms() {
   return (
     <>
       <StldBody>
-        <FormContext.Provider value={{ formData, setFormData, setFormDataToSend }}>
+        <FormContext.Provider
+          value={{ formData, setFormData, formDataToSend, setFormDataToSend }}>
           <ShouldPDFContext.Provider value={{ PDFUpdate, setPDFUpdate }}>
-              <MainContainer>
-                <PrimaryContainer>
-                  <Heading1>Admission Form</Heading1>
-                  <ContentBox>
-                    <InputField>
-                      <FormsInput />
-                    </InputField>
-                    <FormField>
-                      <FormsPreview formDataToSend={formDataToSend}/>
-                    </FormField>  
-                  </ContentBox>
-                </PrimaryContainer>
-              </MainContainer>
+            <MainContainer>
+              <PrimaryContainer>
+                <Heading1>Admission Form</Heading1>
+                <ContentBox>
+                  <InputField>
+                    <FormsInput />
+                  </InputField>
+                  <FormField>
+                    <FormsPreview formDataToSend={formDataToSend} />
+                  </FormField>
+                </ContentBox>
+              </PrimaryContainer>
+            </MainContainer>
           </ShouldPDFContext.Provider>
         </FormContext.Provider>
       </StldBody>

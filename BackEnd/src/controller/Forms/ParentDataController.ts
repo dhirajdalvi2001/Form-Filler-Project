@@ -22,7 +22,7 @@ ParentDataRouter.use(async (req, res, next) => {
   next();
 });
 
-ParentDataRouter.get("/parentdata", async (req, res) => {
+ParentDataRouter.post("/parentdata", async (req, res) => {
   try {
     let { userId }: any = verifyAccessToken(req.body.token);
     let user = await findUser(userId);
@@ -39,7 +39,7 @@ ParentDataRouter.get("/parentdata", async (req, res) => {
   }
 });
 
-ParentDataRouter.post("/parentdata", async (req, res) => {
+ParentDataRouter.put("/parentdata", async (req, res) => {
   let parentData: UserParentData = req.body.parentData;
   let { userId }: any = verifyAccessToken(req.body.token);
   // console.log(collegeFormData);

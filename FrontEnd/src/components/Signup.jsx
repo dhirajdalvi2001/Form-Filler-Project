@@ -10,6 +10,7 @@ import {
   SecondaryContainer,
   StldLink,
 } from "./styles/Login";
+import { SignUp } from "../DataFetchUtils";
 
 function Signup() {
   let navigateTo = useNavigate();
@@ -18,8 +19,16 @@ function Signup() {
     validate
   );
 
-  function submit() {
-    navigateTo("/dashboard");
+  async function submit() {
+    let d = await SignUp(values.email, values.password);
+    console.log(d);
+    if (d.error != null) {
+      alert(d.error);
+      navigateTo("/");
+      return;
+    } else {
+      navigateTo("/dashboard");
+    }
     console.log("Submitted Successfully");
   }
   //                                                                      HTML
