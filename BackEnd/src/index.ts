@@ -43,7 +43,7 @@ import FormRouter from "./controller/Forms";
 
   app.get("/refresh_token", (req, res) => {
     if (req.cookies.jid) {
-      console.log(req.cookies.jid);
+      // console.log(req.cookies.jid);
       let tok: any = verifyRefreshToken(req.cookies.jid);
       if (!tok) {
         return res.json({ token: "" });

@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { useState, createContext, useEffect } from "react";
 import UpArrow from "./UpArrow";
 import { BASE_URL, ACCESS_TOKEN, setToken } from "../DataFetchUtils";
+import { DataProvider } from "./DataProvider";
 
 export const loginContext = createContext();
 
@@ -15,14 +16,14 @@ function App() {
   };
 
   useEffect(async () => {
-    console.log("Here");
+    // console.log("Here");
     let res = await fetch(BASE_URL + "/refresh_token", {
       // mode: "cors",
       credentials: "include",
     });
-    console.log(JSON.stringify(res));
+    // console.log(JSON.stringify(res));
     let tok = await res.json();
-    console.log(tok);
+    // console.log(tok);
     if (tok.token !== "") {
       setToken(tok.token);
       setLogin(true);
@@ -30,17 +31,18 @@ function App() {
       setToken("");
       setLogin(false);
     }
-
     // console.log(login);
   }, []);
   return (
     <>
       <loginContext.Provider value={{ login, changeLogin }}>
-        <BrowserRouter>
-          <Header />
-          <Body />
-          <UpArrow />
-        </BrowserRouter>
+        <DataProvider>
+          <BrowserRouter>
+            <Header />
+            <Body />
+            <UpArrow />
+          </BrowserRouter>
+        </DataProvider>
       </loginContext.Provider>
     </>
   );

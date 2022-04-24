@@ -21,7 +21,7 @@ function Signup() {
 
   async function submit() {
     let d = await SignUp(values.email, values.password);
-    console.log(d);
+    // console.log(d);
     if (d.error != null) {
       alert(d.error);
       navigateTo("/");
@@ -29,7 +29,7 @@ function Signup() {
     } else {
       navigateTo("/dashboard");
     }
-    console.log("Submitted Successfully");
+    // console.log("Submitted Successfully");
   }
   //                                                                      HTML
   return (

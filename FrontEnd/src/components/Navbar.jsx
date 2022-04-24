@@ -13,6 +13,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { loginContext } from "./App";
 import { logoutUser, setToken } from "../DataFetchUtils";
 
+import { FormContext } from "./DataProvider";
 function Navbar(props) {
   let logInValue = useContext(loginContext);
   const login = logInValue.login;
@@ -20,6 +21,7 @@ function Navbar(props) {
   function handleClick() {
     setClick(!click);
   }
+  let FormData = useContext(FormContext);
 
   return (
     <StldNav>
@@ -43,9 +45,10 @@ function Navbar(props) {
               to="/"
               onClick={async () => {
                 let d = await logoutUser();
-                console.log(d);
+                // console.log(d);
                 setToken("");
                 logInValue.changeLogin(false);
+                FormData.setStatesDefault();
               }}>
               Logout
             </NavLink>

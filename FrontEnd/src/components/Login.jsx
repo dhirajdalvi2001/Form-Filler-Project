@@ -41,7 +41,7 @@ function Login() {
   // }
   async function submit() {
     let d = await LoginUser(values.email, values.password);
-    console.log(d);
+    // console.log(d);
     if (d.error !== null) {
       alert(d.error);
       navigateTo("/");
@@ -51,7 +51,7 @@ function Login() {
       logInValue.changeLogin(true);
       navigateTo("/dashboard");
     }
-    console.log("Submitted Successfully");
+    // console.log("Submitted Successfully");
   }
   //                                                                      HTML
   return (

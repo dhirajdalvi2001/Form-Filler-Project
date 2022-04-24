@@ -57,7 +57,7 @@ UserRouter.post("/login", async (req: Request, res: Response) => {
     return res.status(200).json(returnedResponse);
     // .send({ token: createAccessToken(dbUser.id) });
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     returnedResponse = generateResponse("Faild to find user", null);
     return res.status(500).json(returnedResponse);
   }
@@ -82,7 +82,7 @@ UserRouter.post("/add", async (req: Request, res: Response) => {
       return res.status(406).json(returnedResponse);
     }
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     returnedResponse = generateResponse(
       "Server Error Faild User creation ",
       null
@@ -106,7 +106,7 @@ UserRouter.post("/add", async (req: Request, res: Response) => {
     returnedResponse = generateResponse(null, savedUser);
     return res.status(201).json(returnedResponse);
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     returnedResponse = generateResponse(
       "Internal Server Error failed to save user while creation",
       null
@@ -142,7 +142,7 @@ UserRouter.delete("/delete", async (req: Request, res: Response) => {
     sendRefreshToken(res, "");
     return res.status(200).json(returnedResponse);
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     returnedResponse = generateResponse("Error While Deletion", null);
     return res.status(500).json(returnedResponse);
   }
@@ -181,7 +181,7 @@ UserRouter.put("/update", async (req: Request, res: Response) => {
       // console.log(s);
     }
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     returnedResponse = generateResponse("Error while updating", null);
     return res.status(406).json(returnedResponse);
   }
@@ -228,7 +228,7 @@ UserRouter.put("/changepass", async (req: Request, res: Response) => {
     returnedResponse = generateResponse("User not found", null);
     return res.status(404).json(returnedResponse);
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     returnedResponse = generateResponse("Error while updating", null);
     return res.status(406).json(returnedResponse);
   }

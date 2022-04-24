@@ -11,10 +11,27 @@ import {
 } from "pdf-lib";
 import { PDFMenu, ChangePage, DownloadButton, Heading3 } from "./styles/Forms";
 import { BiFirstPage, BiLastPage } from "react-icons/bi";
-import { ShouldPDFContext } from "./Forms";
+import { ShouldPDFContext } from "./DataProvider";
 import { admissionForm } from "./arrays/admissionForm";
+import { FormContext } from "./DataProvider";
+import {
+  tranformToParentDataStruct,
+  tranformToUserCollegeDataStruct,
+  tranformToUserDataStruct,
+  tranformFromUserCollegeData,
+  tranformFromUserData,
+  tranformFromUserParentData,
+  updateCollegeFormData,
+  updateParentFormData,
+  updateUserData,
+} from "../DataFetchUtils";
+import {
+  getCollegeFormData,
+  getParentFormData,
+  getUserData,
+} from "../DataFetchUtils";
 
-function FormsPreview({ formDataToSend }) {
+function FormsPreview() {
   const [winScale, setWinScale] = useState(1);
   window.addEventListener("resize", () => {
     let windowsWidth = window.innerWidth;
@@ -25,17 +42,21 @@ function FormsPreview({ formDataToSend }) {
       setWinScale(0.5);
     }
   });
+
+  // let [formDataToSend, setFormDataToSend] = useState({});
   //states
   const [pageNum, setPageNum] = useState(1);
-  const [pdfUri, setPdfUri] = useState("");
-  const [file, setFile] = useState(new Blob());
+  // const [pdfUri, setPdfUri] = useState("");
+  // const [file, setFile] = useState(new Blob());
   const [arrayBuf, setArrayBuf] = useState(new Uint8Array());
   const updatePDF = useContext(ShouldPDFContext);
   const [defaultPDF, setDefaultPDF] = useState(new Uint8Array());
   const isMountedRef = useRef(null);
 
-  useEffect(() => {
-    getPdf();
+  useEffect(async () => {
+    // console.log("here in preview");
+    await getPdf();
+    await getSetData();
   }, []);
   const getPdf = async () => {
     let pdf = await fetch("http://127.0.0.1:4000/form/collegeform");
@@ -44,6 +65,8 @@ function FormsPreview({ formDataToSend }) {
     setArrayBuf(u8buffer);
     setDefaultPDF(u8buffer);
   };
+  let formcontext = useContext(FormContext);
+  let formDataToSend = formcontext.formDataToSend;
 
   useEffect(() => {
     // if (isMountedRef.current) {
@@ -52,6 +75,51 @@ function FormsPreview({ formDataToSend }) {
     // }
     return () => (isMountedRef.current = false);
   }, [arrayBuf]);
+
+  const getSetData = async () => {
+    try {
+      let datas = await Promise.all([
+        getUserData(),
+        getCollegeFormData(),
+        getParentFormData(),
+      ]);
+      // console.log(datas);
+      let usrDataFrom = {};
+      let usrParentDataFrom = {};
+      let clgDataFrom = {};
+      if (datas[0].error == null) {
+        usrDataFrom = tranformFromUserData(datas[0].data.userData);
+      }
+      if (datas[1].error == null) {
+        clgDataFrom = tranformFromUserCollegeData(
+          datas[1].data.collegeFormData
+        );
+      }
+      if (datas[2].error == null) {
+        usrParentDataFrom = tranformFromUserParentData(datas[2].data);
+      }
+      // console.log("here");
+      // console.log(usrDataFrom);
+      // console.log(usrParentDataFrom);
+      // console.log(clgDataFrom);
+      FormData.setFormData({
+        ...FormData.formData,
+        ...clgDataFrom,
+        ...usrDataFrom,
+        ...usrParentDataFrom,
+      });
+      FormData.setFormDataToSend({
+        ...FormData.formData,
+        ...clgDataFrom,
+        ...usrDataFrom,
+        ...usrParentDataFrom,
+      });
+      updatePDF.setPDFUpdate(true);
+      //----------==================
+    } catch (e) {
+      // console.log(e);
+    }
+  };
 
   // useEffect(() => {
   //   if (!!file) {
@@ -77,55 +145,43 @@ function FormsPreview({ formDataToSend }) {
 
     // Student's Info
     if (!!formDataToSend.studentName) {
-      firstPage.drawText(
-        formDataToSend.studentName + " " + formDataToSend.studentlastName,
-        {
-          x: 150,
-          y: 488,
-          size: fSize,
-          font: timesRoman,
-          color: fColor,
-        }
-      );
+      firstPage.drawText(formDataToSend.studentName, {
+        x: 150,
+        y: 488,
+        size: fSize,
+        font: timesRoman,
+        color: fColor,
+      });
     }
 
     if (!!formDataToSend.studentName) {
-      secondPage.drawText(
-        formDataToSend.studentName + " " + formDataToSend.studentlastName,
-        {
-          x: 54,
-          y: 396.5,
-          size: fSize,
-          font: timesRoman,
-          color: fColor,
-        }
-      );
+      secondPage.drawText(formDataToSend.studentName, {
+        x: 54,
+        y: 396.5,
+        size: fSize,
+        font: timesRoman,
+        color: fColor,
+      });
     }
 
     if (!!formDataToSend.studentName) {
-      secondPage.drawText(
-        formDataToSend.studentName + " " + formDataToSend.studentlastName,
-        {
-          x: 314,
-          y: 138.5,
-          size: fSize,
-          font: timesRoman,
-          color: fColor,
-        }
-      );
+      secondPage.drawText(formDataToSend.studentName, {
+        x: 314,
+        y: 138.5,
+        size: fSize,
+        font: timesRoman,
+        color: fColor,
+      });
     }
 
     if (!!formDataToSend.studentName) {
-      secondPage.drawText(
-        formDataToSend.studentName + " " + formDataToSend.studentlastName,
-        {
-          x: 300,
-          y: 59.5,
-          size: fSize,
-          font: timesRoman,
-          color: fColor,
-        }
-      );
+      secondPage.drawText(formDataToSend.studentName, {
+        x: 300,
+        y: 59.5,
+        size: fSize,
+        font: timesRoman,
+        color: fColor,
+      });
     }
 
     if (!!formDataToSend.studentNumber) {
@@ -150,42 +206,33 @@ function FormsPreview({ formDataToSend }) {
 
     // Father's Info
     if (!!formDataToSend.fathersName) {
-      firstPage.drawText(
-        formDataToSend.fathersName + " " + formDataToSend.studentlastName,
-        {
-          x: 156,
-          y: 467,
-          size: fSize,
-          font: timesRoman,
-          color: fColor,
-        }
-      );
+      firstPage.drawText(formDataToSend.fathersName, {
+        x: 156,
+        y: 467,
+        size: fSize,
+        font: timesRoman,
+        color: fColor,
+      });
     }
 
     if (!!formDataToSend.fathersName) {
-      secondPage.drawText(
-        formDataToSend.fathersName + " " + formDataToSend.studentlastName,
-        {
-          x: 318,
-          y: 397.5,
-          size: fSize,
-          font: timesRoman,
-          color: fColor,
-        }
-      );
+      secondPage.drawText(formDataToSend.fathersName, {
+        x: 318,
+        y: 397.5,
+        size: fSize,
+        font: timesRoman,
+        color: fColor,
+      });
     }
 
     if (!!formDataToSend.fathersName) {
-      secondPage.drawText(
-        formDataToSend.fathersName + " " + formDataToSend.studentlastName,
-        {
-          x: 54,
-          y: 138,
-          size: fSize,
-          font: timesRoman,
-          color: fColor,
-        }
-      );
+      secondPage.drawText(formDataToSend.fathersName, {
+        x: 54,
+        y: 138,
+        size: fSize,
+        font: timesRoman,
+        color: fColor,
+      });
     }
 
     if (!!formDataToSend.fathersOccupation) {
@@ -533,6 +580,7 @@ function FormsPreview({ formDataToSend }) {
     return pdfBytes;
   };
   if (updatePDF.PDFUpdate) {
+    // setFormDataToSend();
     isMountedRef.current = true;
     (async () => {
       let buf = await pdfUpdateFunction();
@@ -632,6 +680,44 @@ function FormsPreview({ formDataToSend }) {
               downloadBlob(blobbed, "Admission-Form(FormFiller).pdf");
             }}>
             Download Here
+            {/* <a href={pdfUri}></a> */}
+          </DownloadButton>
+          <DownloadButton
+            onClick={async () => {
+              // console.log(formcontext.formDataToSend);
+              // console.log(formcontext.formData);
+              let data = formcontext.formDataToSend;
+              let userData = tranformToUserDataStruct(data);
+              let userParentData = tranformToParentDataStruct(data);
+              let userCollegeData = tranformToUserCollegeDataStruct(data);
+              let res1 = await updateCollegeFormData(userCollegeData);
+              let res2 = await updateParentFormData(userParentData);
+              let res3 = await updateUserData(userData);
+              if (
+                res1.error !== null ||
+                res2.error !== null ||
+                res3.error !== null
+              ) {
+                alert("Error occured please retry");
+              }
+              // console.log(res1);
+              // console.log(res2);
+              // console.log(res3);
+
+              // console.log("-----------------------------------------------");
+              // console.log(d);
+              // console.log(a);
+              // console.log(b);
+              // console.log(c);
+              // let e = tranformFromUserCollegeData(c);
+              // let f = tranformFromUserData(a);
+              // let g = tranformFromUserParentData(b);
+              // console.log(e);
+              // console.log(f);
+              // console.log(g);
+              // console.log("-----------------------------------------------");
+            }}>
+            Save
             {/* <a href={pdfUri}></a> */}
           </DownloadButton>
         </>
