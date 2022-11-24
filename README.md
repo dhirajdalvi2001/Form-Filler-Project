@@ -26,7 +26,7 @@
 ### Forms Page (Mobile view)  
 ![image](https://user-images.githubusercontent.com/91786927/203785793-e3ff8eaa-0781-4224-93c0-5d13bc9f7323.png)  
   
-#### Setup
+### Setup
   
 ```bash
 # backend
@@ -37,7 +37,7 @@ cd Backend
 npm install
 ```
 
-#### starting
+### Starting
 
 ```bash
 # backend
